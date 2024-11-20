@@ -1,8 +1,9 @@
 import React from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
+import { TProject } from "@/types/types.project";
 
-const ProjectCard = ({ project }) => {
+const ProjectCard = ({ project }: { project: TProject }) => {
   return (
     <div className="flex flex-col md:flex-row border-2 rounded-lg shadow-md overflow-hidden my-8">
       {/* Left Side: Image with Live Link */}
