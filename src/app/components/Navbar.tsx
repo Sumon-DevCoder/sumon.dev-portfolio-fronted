@@ -28,7 +28,7 @@ const Navbar = () => {
           pathname === "/product" ? "text-orange-400  border-orange-600" : ""
         }`}
       >
-        Products
+        About
       </Link>
       <Link
         href="/about"
@@ -36,7 +36,7 @@ const Navbar = () => {
           pathname === "/about" ? "text-orange-400  border-orange-600" : ""
         }`}
       >
-        About
+        Projects
       </Link>
       <Link
         href="/contact"
@@ -44,30 +44,22 @@ const Navbar = () => {
           pathname === "/contact" ? "text-orange-400  border-orange-600" : ""
         }`}
       >
-        Contact
+        Blogs
       </Link>
       <Link
         href="/cart"
-        className={`p-2 rounded-lg text-slate-200 ${
+        className={`p-2 rounded-md  text-slate-200 bg-green-800 ${
           pathname === "/cart" ? "text-orange-400  border-orange-600" : ""
         }`}
       >
-        Carts
-      </Link>
-      <Link
-        href="/dashboard/order-history"
-        className={`p-2 rounded-lg text-slate-200 ${
-          pathname === "/about" ? "text-orange-400  border-orange-600" : ""
-        }`}
-      >
-        Order History
+        Contact
       </Link>
     </>
   );
 
   return (
     <div className="sticky hrefp-0 z-50">
-      <div className="navbar bg-slate-800 shadow-lg px-5 text-white">
+      <div className="navbar bg-dark shadow-lg px-5 text-white flex justify-between">
         <div className="navbar-start">
           <div className="dropdown">
             <div
@@ -113,7 +105,7 @@ const Navbar = () => {
             {isMenuOpen && (
               <ul
                 tabIndex={0}
-                className="menu menu-sm dropdown-content bg-gray-600  rounded-box z-[1] mt-3 w-52 p-2 shadow gap-1"
+                className="menu menu-sm dropdown-content  bg-gray-600  rounded-box z-[1] mt-3 w-52 p-2 shadow gap-1"
               >
                 {Links}
               </ul>
@@ -121,13 +113,15 @@ const Navbar = () => {
           </div>
           <Link
             href={`/`}
-            className="btn btn-ghost text-lg md:text-xl bg-gradient-href-r from-slate-200"
+            className="btn btn-ghost text-lg md:text-xl bg-gradient-href-r from-slate-100 font-normal"
           >
-            <span className="text-2xl mt-1">Sumon DevCoder</span>
+            <span className="text-2xl mt-1">
+              <span className="text-green-500">Sumon</span>DevCoder
+            </span>
           </Link>
         </div>
         <div className="navbar-center hidden lg:flex">
-          <ul className="menu menu-horizontal px-1 space-x-3 font-semibold text-base">
+          <ul className="menu menu-horizontal px-1 space-x-3  text-lg font-normal">
             {Links}
           </ul>
         </div>

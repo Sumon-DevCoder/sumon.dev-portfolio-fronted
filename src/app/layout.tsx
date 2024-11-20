@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { Inter } from "next/font/google";
+import { Poppins } from "next/font/google"; // Import Poppins font
 import TopLoader from "./components/TopLoader";
 
-const inter = Inter({ subsets: ["latin"] });
+// Load the Poppins font with the subsets you need
+const poppins = Poppins({ subsets: ["latin"], weight: ["400", "700"] });
 
 export const metadata: Metadata = {
   title: "Sumon.DevCoder",
@@ -17,7 +18,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${inter.className} bg-semiDark pb-8`}>
+      <body
+        className={`${poppins.className} pb-8 bg-[#0a0a0a]`} // Apply Poppins font and background color
+      >
         <TopLoader />
         {children}
       </body>

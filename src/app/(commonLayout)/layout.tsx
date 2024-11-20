@@ -11,7 +11,7 @@ export default async function dashboardLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <div>
+    <div className="max-w-screen-xl m-auto">
       {/* <Navbar /> */}
       {children}
       {/* <Footer /> */}
