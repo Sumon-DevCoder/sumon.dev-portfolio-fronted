@@ -3,7 +3,7 @@ import Typewriter from "typewriter-effect";
 
 export default function TypeText() {
   return (
-    <h1 className="my-name">
+    <p>
       <Typewriter
         options={{
           strings: ["Mustafizr Rahman Sumon", "MERN Stack Developer"],
@@ -12,13 +12,13 @@ export default function TypeText() {
         }}
         onInit={(typewriter) => {
           typewriter
-            .changeDelay(50) // Adjust typing speed as needed
+            .changeDelay(50)
             .pauseFor(1000)
             .deleteAll()
-            .typeString("Muhammad Saroar")
+            .typeString("Mustafizr Rahman Sumon")
             .start();
         }}
       />
-    </h1>
+    </p>
   );
 }

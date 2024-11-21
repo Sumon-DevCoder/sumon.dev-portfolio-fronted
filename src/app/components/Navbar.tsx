@@ -38,6 +38,14 @@ const Navbar = () => {
         About
       </Link>
       <Link
+        href="#skills"
+        className={`p-2 rounded-lg  hover:text-green-600  ${
+          currentHash === "#skills" ? "text-orange-400 border-orange-600" : ""
+        }`}
+      >
+        Skills
+      </Link>
+      <Link
         href="#project"
         className={`p-2 rounded-lg  hover:text-green-600 ${
           currentHash === "#project" ? "text-orange-400 border-orange-600" : ""
