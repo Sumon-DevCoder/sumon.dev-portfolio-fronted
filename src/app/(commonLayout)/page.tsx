@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 import Navbar from "../components/Navbar";
 import HeroSection from "../components/HeroSection";
@@ -7,11 +9,11 @@ import Testimonials from "../components/Testimonials";
 import ContactSection from "../components/ContactSection";
 import BlogSection from "../components/BlogSection";
 import StatisticsSection from "../components/StatisticsSection";
-import Footer from "../components/Footer";
+import EducationalDescription from "../components/EducationalDescription";
 
 const HomePage = () => {
   return (
-    <div>
+    <div className="max-w-screen-xl m-auto">
       <Navbar />
       <HeroSection />
       <TechnicalSkills />
@@ -20,7 +22,7 @@ const HomePage = () => {
       <ContactSection />
       <BlogSection />
       <StatisticsSection />
-      <Footer />
+      <EducationalDescription />
     </div>
   );
 };

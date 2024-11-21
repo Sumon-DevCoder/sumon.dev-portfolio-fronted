@@ -12,7 +12,7 @@ const StatisticsSection: React.FC = () => {
     },
     {
       title: "Years of Experience",
-      value: "5",
+      value: "0",
       icon: <FaCode />,
       color: "green-500",
     },

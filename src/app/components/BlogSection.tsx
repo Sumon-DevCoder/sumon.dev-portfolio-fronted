@@ -23,7 +23,7 @@ const BlogSection: React.FC = () => {
   ];
 
   return (
-    <section className="py-16 ">
+    <section className="py-16" id="blogs">
       <div className="container mx-auto px-4">
         <h2 className="text-3xl font-semibold text-center mb-8">
           Latest Blog Posts

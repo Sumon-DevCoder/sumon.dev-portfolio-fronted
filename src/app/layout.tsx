@@ -18,9 +18,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${poppins.className} pb-8 bg-[#0a0a0a]`} // Apply Poppins font and background color
-      >
+      <body className={`${poppins.className}  bg-[#0a0a0a]`}>
         <TopLoader />
         {children}
       </body>

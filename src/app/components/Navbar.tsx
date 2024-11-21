@@ -1,55 +1,62 @@
 "use client";
 
-import { usePathname } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const pathname = usePathname();
+  const [currentHash, setCurrentHash] = useState("");
 
   const handleToggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
 
+  useEffect(() => {
+    setCurrentHash(window.location.hash);
+    const handleHashChange = () => setCurrentHash(window.location.hash);
+    window.addEventListener("hashchange", handleHashChange);
+
+    return () => window.removeEventListener("hashchange", handleHashChange);
+  }, []);
+
   const Links = (
     <>
       <Link
-        href="/"
-        className={`p-2 rounded-lg text-slate-200 ${
-          pathname === "/" ? "text-orange-400  border-orange-600" : ""
+        href="#"
+        className={`p-2 rounded-lg  hover:text-green-600  ${
+          currentHash === "#home" ? "text-orange-400 border-orange-600" : ""
         }`}
       >
         Home
       </Link>
       <Link
-        href="/product"
-        className={`p-2 rounded-lg text-slate-200 ${
-          pathname === "/product" ? "text-orange-400  border-orange-600" : ""
+        href="#about"
+        className={`p-2 rounded-lg  hover:text-green-600  ${
+          currentHash === "#about" ? "text-orange-400 border-orange-600" : ""
         }`}
       >
         About
       </Link>
       <Link
-        href="/about"
-        className={`p-2 rounded-lg text-slate-200 ${
-          pathname === "/about" ? "text-orange-400  border-orange-600" : ""
+        href="#project"
+        className={`p-2 rounded-lg  hover:text-green-600 ${
+          currentHash === "#project" ? "text-orange-400 border-orange-600" : ""
         }`}
       >
         Projects
       </Link>
       <Link
-        href="/contact"
-        className={`p-2 rounded-lg text-slate-200 ${
-          pathname === "/contact" ? "text-orange-400  border-orange-600" : ""
+        href="#blogs"
+        className={`p-2 rounded-lg  hover:text-green-600 ${
+          currentHash === "#blogs" ? "text-orange-400 border-orange-600" : ""
         }`}
       >
         Blogs
       </Link>
       <Link
-        href="/cart"
-        className={`p-2 rounded-md  text-slate-200 bg-green-800 ${
-          pathname === "/cart" ? "text-orange-400  border-orange-600" : ""
+        href="#contact"
+        className={`p-2 rounded-md  hover:text-green-600 border-b-2 ${
+          currentHash === "#contact" ? "text-orange-400 border-orange-600" : ""
         }`}
       >
         Contact
@@ -58,7 +65,7 @@ const Navbar = () => {
   );
 
   return (
-    <div className="sticky hrefp-0 z-50">
+    <div className="sticky href p-0 z-50 top-0 bg-slate-950">
       <div className="navbar bg-dark shadow-lg px-5 text-white flex justify-between">
         <div className="navbar-start">
           <div className="dropdown">
@@ -113,9 +120,9 @@ const Navbar = () => {
           </div>
           <Link
             href={`/`}
-            className="btn btn-ghost text-lg md:text-xl bg-gradient-href-r from-slate-100 font-normal"
+            className="btn btn-ghost text-lg md:text-xl bg-gradient-href-r from-slate-100 font-semibold"
           >
-            <span className="text-2xl mt-1">
+            <span className="text-[25px] mt-1">
               <span className="text-green-500">Sumon</span>DevCoder
             </span>
           </Link>

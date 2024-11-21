@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Footer from "../components/Footer";
 
 export const metadata: Metadata = {
   title: "Sumon.Dev | Portfolio",
@@ -11,10 +12,9 @@ export default async function dashboardLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <div className="max-w-screen-xl m-auto">
-      {/* <Navbar /> */}
+    <div className="">
       {children}
-      {/* <Footer /> */}
+      <Footer />
     </div>
   );
 }

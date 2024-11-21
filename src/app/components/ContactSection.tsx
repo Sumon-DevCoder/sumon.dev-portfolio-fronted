@@ -2,7 +2,10 @@ import Image from "next/image";
 
 const ContactSection = () => {
   return (
-    <div className="bg-gradient-to-r from-indigo-600 via-indigo-500 to-indigo-400 py-24">
+    <div
+      className="bg-gradient-to-r from-indigo-600 via-indigo-500 to-indigo-400 py-24"
+      id="contact"
+    >
       <form action="https://fabform.io/f/xxxxx" method="post">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 grid-cols-1 gap-16">
