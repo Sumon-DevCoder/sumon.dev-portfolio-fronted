@@ -33,6 +33,19 @@ const AdminSidebar = () => {
             { name: "📋 Skills List", path: "/admin-dashboard/skills-list" },
           ],
         },
+        {
+          name: "📦 Project",
+          subLinks: [
+            {
+              name: "➕ Create Project",
+              path: "/admin-dashboard/create-project",
+            },
+            {
+              name: "📋 Project List",
+              path: "/admin-dashboard/project-list",
+            },
+          ],
+        },
         { name: "📦 Orders", path: "/admin-dashboard/order-management" },
         { name: "👥 Users", path: "/admin-dashboard/user-management" },
         { name: "⚙️ Settings", path: "/admin-dashboard/setting" },
