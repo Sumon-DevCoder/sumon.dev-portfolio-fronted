@@ -1,25 +1,23 @@
 import React from "react";
-import Image from "next/image";
 import { motion } from "framer-motion";
 import { TProject } from "@/types/types.project";
 
 const ProjectCard = ({ project }: { project: TProject }) => {
   return (
     <div className="flex flex-col md:flex-row border-2 rounded-lg shadow-md overflow-hidden my-8">
-      {/* Left Side: Image with Live Link */}
-      <div className="md:w-1/2">
+      {/* Left Side: Live Preview in iframe */}
+      <div className="md:w-1/2 h-64 md:h-auto overflow-hidden relative">
         <a href={project.liveLink} target="_blank" rel="noopener noreferrer">
           <motion.div
-            whileHover={{ scale: 1.05 }}
+            whileHover={{ scale: 1.02 }}
             className="h-full w-full overflow-hidden"
           >
-            <Image
-              src={project.image}
-              alt={project.title}
-              width={500}
-              height={300}
-              className="object-cover h-full w-full"
-            />
+            <iframe
+              src={project.liveLink}
+              className="h-full w-full border-none"
+              title={project.title}
+              sandbox="allow-same-origin allow-scripts allow-popups allow-forms"
+            ></iframe>
           </motion.div>
         </a>
       </div>

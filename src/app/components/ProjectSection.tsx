@@ -11,7 +11,7 @@ const ProjectSection = () => {
       technologies: ["Next.js", "Tailwind CSS", "MongoDB", "Node.js"],
       clientCode: "https://github.com/sumon-dev/animal-bazaar-client",
       serverCode: "https://github.com/sumon-dev/animal-bazaar-server",
-      liveLink: "https://animal-bazaar.com",
+      liveLink: "https://animal-bazzar-client.vercel.app/",
       image: "/assets/animal-bazaar.png",
     },
     {

@@ -5,7 +5,9 @@ import React from "react";
 import { motion } from "framer-motion";
 import { useGetSkillsQuery } from "@/redux/features/skills/skillsApi";
 
+// type
 export type TSkills = {
+  _id: string;
   name: string;
   level: number;
   img: string;

@@ -9,6 +9,13 @@ export const skillsApi = baseApi.injectEndpoints({
       }),
       providesTags: ["skills"],
     }),
+    getSingleSkills: builder.query({
+      query: (id) => ({
+        method: "GET",
+        url: `/skills/${id}`,
+      }),
+      providesTags: ["skills"],
+    }),
     createSkills: builder.mutation({
       query: (data) => ({
         method: "POST",
@@ -40,6 +47,7 @@ export const skillsApi = baseApi.injectEndpoints({
 
 export const {
   useGetSkillsQuery,
+  useGetSingleSkillsQuery,
   useCreateSkillsMutation,
   useDeleteSkillsByIdMutation,
   useUpdateSkillsByIdMutation,
