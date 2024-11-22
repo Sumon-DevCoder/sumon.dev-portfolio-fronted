@@ -10,10 +10,13 @@ export const blogApi = baseApi.injectEndpoints({
       providesTags: ["blog"],
     }),
     getSingleblog: builder.query({
-      query: (id) => ({
-        method: "GET",
-        url: `/blogs/${id}`,
-      }),
+      query: (id) => {
+        console.log("blog api hitting", id);
+        return {
+          method: "GET",
+          url: `/blogs/${id}`,
+        };
+      },
       providesTags: ["blog"],
     }),
     createblog: builder.mutation({

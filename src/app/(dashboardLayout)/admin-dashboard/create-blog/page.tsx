@@ -3,93 +3,71 @@ import { useCreateblogMutation } from "@/redux/features/blog/blogApi";
 import { useRouter } from "next/navigation";
 import { FieldValues, useForm } from "react-hook-form";
 import { toast } from "sonner";
+import JoditEditor from "jodit-react";
+import { useRef, useState } from "react";
 
 const CreateBlog = () => {
   const router = useRouter();
+  const editorRef = useRef(null); // Ref for Jodit Editor
+  const [content, setContent] = useState(""); // State for editor content
+
   const {
     register,
     handleSubmit,
     formState: { errors },
     reset,
+    setValue, // For setting form values programmatically
   } = useForm();
 
   const [createBlog] = useCreateblogMutation();
 
-  // Image upload function
+  // Function to handle image upload
   const uploadImageToImgBB = async (file: File) => {
     const url = `https://api.imgbb.com/1/upload?key=${"9b72c2e7f55726fd9a28bfb8bfedc08b"}`;
-
     const formData = new FormData();
     formData.append("image", file);
 
     try {
-      const response = await fetch(url, {
-        method: "POST",
-        body: formData,
-      });
+      const response = await fetch(url, { method: "POST", body: formData });
       const data = await response.json();
-
-      if (data.success) {
-        return data.data.url;
-      } else {
-        throw new Error(data.error.message);
-      }
+      if (data.success) return data.data.url;
+      throw new Error(data.error.message);
     } catch (error) {
       console.error("Error uploading image:", error);
       return null;
     }
   };
 
-  // onSubmit function
+  // Function to handle form submission
   const onSubmit = async (data: FieldValues) => {
     const toastId = toast.loading("Creating...");
-
     try {
-      const imgFile = data.img[0] as File; // Get the first file only
+      const imgFile = data.img[0];
       const imgUrl = await uploadImageToImgBB(imgFile);
-      if (!imgUrl) {
-        throw new Error("Image upload failed");
-      }
+      if (!imgUrl) throw new Error("Image upload failed");
 
-      const date = new Date("November 15, 2024");
+      const date = new Date();
       const formattedDate = `${date.toLocaleString("default", {
         month: "long",
       })} ${date.getDate()}, ${date.getFullYear()}`;
 
       const BlogInfo = {
         title: data.title,
-        description: data.description,
+        description: content, // Use content state for description
         img: imgUrl,
         date: formattedDate,
       };
 
-      console.log(BlogInfo);
-
-      // Send to database
       const res = await createBlog(BlogInfo).unwrap();
-
-      if (res) {
-        toast.success(res?.message, { id: toastId, duration: 3000 });
-        reset();
-        router.push("/admin-dashboard/blog-list");
-      }
-
-      console.log(res);
+      toast.success(res?.message, { id: toastId });
+      reset();
+      setContent(""); // Clear the editor content
+      router.push("/admin-dashboard/blog-list");
     } catch (err) {
-      const serverMsgErr = (err as Error)?.message || "Something went wrong";
-
-      toast.error(serverMsgErr, { id: toastId, duration: 3000 });
+      toast.error((err?.message as string) || "Something went wrong", {
+        id: toastId,
+      });
     }
-  };
-
-  // Validation for minimum 1 image upload
-  const validateFiles = (files: FileList): Promise<string | true> => {
-    return new Promise((resolve) => {
-      if (files.length < 1) {
-        resolve("At least 1 image is required");
-      }
-      resolve(true);
-    });
   };
 
   return (
@@ -102,18 +80,15 @@ const CreateBlog = () => {
         <div className="mb-5">
           <label
             htmlFor="title"
-            className="mb-2 block text-sm font-medium text-indigo-700"
+            className="block text-sm font-medium text-indigo-700"
           >
             Blog Title
           </label>
           <input
             type="text"
-            {...register("title", {
-              required: "Blog title is required",
-            })}
+            {...register("title", { required: "Blog title is required" })}
             id="title"
-            placeholder="Blog title"
-            className="w-full rounded-md border border-gray-300 bg-white py-3 px-4 text-sm font-medium text-gray-700 outline-none focus:border-indigo-500 focus:shadow-md"
+            className="w-full border rounded-md px-4 py-3 text-black bg-gray-50 focus:bg-white focus:ring-indigo-500 focus:border-indigo-500"
           />
           {errors.title && (
             <p className="text-red-500">{errors.title.message as string}</p>
@@ -124,19 +99,24 @@ const CreateBlog = () => {
         <div className="mb-5">
           <label
             htmlFor="description"
-            className="mb-2 block text-sm font-medium text-indigo-700"
+            className="block text-sm font-medium text-indigo-700"
           >
             Description
           </label>
-          <textarea
-            {...register("description", {
-              required: "Description is required",
-            })}
-            id="description"
-            placeholder="Blog description"
-            className="w-full rounded-md border border-gray-300 bg-white py-3 px-4 text-sm font-medium text-gray-700 outline-none focus:border-indigo-500 focus:shadow-md"
-            rows={4}
-          />
+          <div className="border rounded-md text-black bg-gray-50 focus-within:bg-white">
+            <JoditEditor
+              ref={editorRef}
+              value={content}
+              config={{
+                readonly: false, // All options from Jodit API are available
+              }}
+              tabIndex={1}
+              onBlur={(newContent) => {
+                setContent(newContent); // Update state
+                setValue("description", newContent); // Set form value
+              }}
+            />
+          </div>
           {errors.description && (
             <p className="text-red-500">
               {errors.description.message as string}
@@ -147,22 +127,22 @@ const CreateBlog = () => {
         {/* Blog Image */}
         <div className="mb-5">
           <label
-            htmlFor="Skills-image"
-            className="mb-2 block text-sm font-medium text-indigo-700"
+            htmlFor="img"
+            className="block text-sm font-medium text-indigo-700"
           >
-            Blogs Image
+            Blog Image
           </label>
           <input
             type="file"
             {...register("img", {
-              required: "An image is required",
-              validate: validateFiles,
+              required: "Image is required",
+              validate: (files) =>
+                files.length > 0 || "Upload at least one image",
             })}
-            id="Skills-image"
+            id="img"
             accept="image/*"
-            className="w-full rounded-md border border-gray-300 bg-white py-3 px-4 text-sm font-medium text-gray-700 outline-none focus:border-indigo-500 focus:shadow-md"
+            className="w-full border rounded-md px-4 py-3 bg-gray-50 focus:bg-white"
           />
-          <small className="text-gray-500">Upload an image</small>
           {errors.img && (
             <p className="text-red-500">{errors.img.message as string}</p>
           )}
@@ -171,7 +151,7 @@ const CreateBlog = () => {
         {/* Submit Button */}
         <button
           type="submit"
-          className="mt-4 w-full rounded-md bg-indigo-600 py-3 text-sm font-medium text-white hover:bg-indigo-700 focus:outline-none"
+          className="w-full bg-indigo-600 text-white py-3 rounded-md hover:bg-indigo-700"
         >
           Create Blog
         </button>

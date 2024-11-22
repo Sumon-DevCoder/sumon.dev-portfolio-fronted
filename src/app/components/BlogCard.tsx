@@ -1,7 +1,9 @@
 import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 
 interface BlogCardProps {
+  _id?: string;
   title: string;
   description: string;
   date: string;
@@ -9,6 +11,7 @@ interface BlogCardProps {
 }
 
 const BlogCard: React.FC<BlogCardProps> = ({
+  _id,
   title,
   description,
   date,
@@ -29,9 +32,12 @@ const BlogCard: React.FC<BlogCardProps> = ({
         <div className="flex items-center text-sm text-gray-500">
           <span>{date}</span>
         </div>
-        <a href="#" className="text-green-500 mt-4 inline-block">
+        <Link
+          href={`/blog/${_id}`}
+          className="text-green-500 mt-4 inline-block text-lg underline hover:text-red-300"
+        >
           Read more
-        </a>
+        </Link>
       </div>
     </div>
   );

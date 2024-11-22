@@ -1,11 +1,5 @@
 import React, { useEffect } from "react";
-import {
-  FaDownload,
-  FaFacebook,
-  FaGithub,
-  FaLinkedin,
-  FaTwitter,
-} from "react-icons/fa";
+import { FaDownload, FaFacebook, FaGithub, FaLinkedin } from "react-icons/fa";
 import developerImg from "../../../public/assets/sumon.dev.png";
 import Image from "next/image";
 import TypeText from "./sub-components/TypeText";
@@ -76,7 +70,7 @@ const HeroSection = () => {
             data-aos="fade-up"
           >
             <a
-              href="https://github.com/sumon-dev"
+              href="https://github.com/sumon-devCoder"
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center justify-center w-12 h-12 border-2 border-green-400 rounded-full hover:bg-green-400 hover:text-white transition duration-300"
@@ -84,7 +78,7 @@ const HeroSection = () => {
               <FaGithub className="text-xl" />
             </a>
             <a
-              href="https://www.linkedin.com/in/sumon-dev"
+              href="https://www.linkedin.com/in/mustafizur-rahman-sumon-790199290/"
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center justify-center w-12 h-12 border-2 border-green-400 rounded-full hover:bg-green-400 hover:text-white transition duration-300"
@@ -92,15 +86,7 @@ const HeroSection = () => {
               <FaLinkedin className="text-xl" />
             </a>
             <a
-              href="https://twitter.com/sumon_dev"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center justify-center w-12 h-12 border-2 border-green-400 rounded-full hover:bg-green-400 hover:text-white transition duration-300"
-            >
-              <FaTwitter className="text-xl" />
-            </a>
-            <a
-              href="https://facebook.com/sumon.dev"
+              href="https://facebook.com/sumon.devCoder"
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center justify-center w-12 h-12 border-2 border-green-400 rounded-full hover:bg-green-400 hover:text-white transition duration-300"

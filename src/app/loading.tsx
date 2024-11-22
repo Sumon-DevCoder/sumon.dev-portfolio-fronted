@@ -1,11 +1,10 @@
 import React from "react";
-import { Mosaic } from "react-loading-indicators";
+import Loader from "./components/Loader";
 
 const loading = () => {
   return (
     <div>
-      <Mosaic color="#32cd32" size="medium" text="" textColor="" />
-      <h2>Loooooo....</h2>
+      <Loader />
     </div>
   );
 };
