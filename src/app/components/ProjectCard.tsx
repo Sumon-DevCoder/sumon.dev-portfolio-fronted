@@ -1,12 +1,22 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { motion } from "framer-motion";
 import { TProject } from "@/types/types.project";
+import Link from "next/link";
+import AOS from "aos";
+import "aos/dist/aos.css"; // Import the AOS styles
 
 const ProjectCard = ({ project }: { project: TProject }) => {
+  useEffect(() => {
+    AOS.init({ duration: 1000 }); // Initialize AOS
+  }, []);
+
   return (
     <div className="flex flex-col md:flex-row border-2 rounded-lg shadow-md overflow-hidden my-8">
       {/* Left Side: Live Preview in iframe */}
-      <div className="md:w-1/2 h-64 md:h-auto overflow-hidden relative">
+      <div
+        className="md:w-1/2 h-64 md:h-auto overflow-hidden relative"
+        data-aos="fade-right" // Add fade-right animation
+      >
         <a href={project.liveLink} target="_blank" rel="noopener noreferrer">
           <motion.div
             whileHover={{ scale: 1.02 }}
@@ -24,15 +34,27 @@ const ProjectCard = ({ project }: { project: TProject }) => {
 
       {/* Right Side: Content */}
       <div className="md:w-1/2 p-6 flex flex-col justify-between">
-        <div>
+        <div data-aos="fade-left" className="mb-4">
+          {" "}
+          {/* Fade in left for content */}
           <h3 className="text-2xl font-bold text-green-400 mb-3">
             {project.title}
           </h3>
-          <p className="text-gray-300 mb-4">{project.description}</p>
-
+          <p className="text-gray-300 mb-4">
+            {project.description?.slice(0, 200)}
+          </p>
           {/* Technology Stack */}
-          <h4 className="text-lg font-medium text-white mb-2">Technologies:</h4>
-          <ul className="list-disc pl-5 text-gray-400 mb-4">
+          <h4
+            className="text-lg font-medium text-white mb-2"
+            data-aos="zoom-in"
+          >
+            {" "}
+            {/* Zoom-in for tech stack */}
+            Technologies:
+          </h4>
+          <ul className="list-disc pl-5 text-gray-400 mb-4" data-aos="fade-up">
+            {" "}
+            {/* Fade up for the list */}
             {project.technologies.map((tech, index) => (
               <li key={index}>{tech}</li>
             ))}
@@ -45,6 +67,7 @@ const ProjectCard = ({ project }: { project: TProject }) => {
             href={project.clientCode}
             target="_blank"
             rel="noopener noreferrer"
+            data-aos="zoom-in-up" // Zoom-in-up animation for the button
           >
             <motion.button
               className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg"
@@ -58,6 +81,7 @@ const ProjectCard = ({ project }: { project: TProject }) => {
             href={project.serverCode}
             target="_blank"
             rel="noopener noreferrer"
+            data-aos="zoom-in-up"
           >
             <motion.button
               className="px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white rounded-lg"
@@ -67,7 +91,12 @@ const ProjectCard = ({ project }: { project: TProject }) => {
               Server Code
             </motion.button>
           </a>
-          <a href={project.liveLink} target="_blank" rel="noopener noreferrer">
+          <a
+            href={project.liveLink}
+            target="_blank"
+            rel="noopener noreferrer"
+            data-aos="zoom-in-up"
+          >
             <motion.button
               className="px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded-lg"
               whileHover={{ scale: 1.1 }}
@@ -76,6 +105,15 @@ const ProjectCard = ({ project }: { project: TProject }) => {
               Live Link
             </motion.button>
           </a>
+          <Link href={`/project/${project?._id}`} data-aos="zoom-in-up">
+            <motion.button
+              className="px-4 py-2 bg-amber-600 hover:bg-green-700 text-white rounded-lg"
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              Details
+            </motion.button>
+          </Link>
         </div>
       </div>
     </div>

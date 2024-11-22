@@ -64,9 +64,9 @@ const CreateBlog = () => {
       setContent(""); // Clear the editor content
       router.push("/admin-dashboard/blog-list");
     } catch (err) {
-      toast.error((err?.message as string) || "Something went wrong", {
-        id: toastId,
-      });
+      const errorMessage =
+        (err as { message: string }).message || "Something went wrong";
+      toast.error(errorMessage, { id: toastId });
     }
   };
 
@@ -108,9 +108,9 @@ const CreateBlog = () => {
               ref={editorRef}
               value={content}
               config={{
-                readonly: false, // All options from Jodit API are available
+                readonly: false,
+                tabIndex: 1,
               }}
-              tabIndex={1}
               onBlur={(newContent) => {
                 setContent(newContent); // Update state
                 setValue("description", newContent); // Set form value

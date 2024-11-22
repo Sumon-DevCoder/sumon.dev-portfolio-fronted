@@ -1,36 +1,119 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# **My Portfolio Backend**
 
-## Getting Started
+A backend system designed to power a modern and dynamic portfolio website. Built with a robust MERN (MongoDB, Express.js, React, Node.js) stack, this backend provides seamless CRUD operations for managing various portfolio sections such as projects, experiences, skills, and blogs. The system is integrated with Next.js for efficient rendering and Redux for state management, ensuring a smooth and dynamic full-stack experience.
 
-First, run the development server:
+## **Live Demo**
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+[Live Application](https://meeting-room-booking-server-zeta.vercel.app/)
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## **Table of Contents**
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- [Project Overview](#project-overview)
+- [Features](#features)
+- [Technology Stack](#technology-stack)
+- [Installation](#installation)
+- [Usage](#usage)
 
-## Learn More
+---
 
-To learn more about Next.js, take a look at the following resources:
+## **Project Overview**
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+The **My Portfolio Backend** serves as the backbone of a professional portfolio website, offering a secure and scalable system for managing content. With this backend, users (admins) can easily create, update, and delete portfolio sections, such as projects, skills, experiences, and blog posts. The system utilizes modern web technologies, ensuring performance, maintainability, and seamless integration with the frontend.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+The backend is designed to be modular and scalable, making it easy to expand as the portfolio grows, and it allows for easy integration with a dynamic Next.js frontend. The system is secure, optimized, and built with best practices in mind.
 
-## Deploy on Vercel
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## **Key Features**
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### **1. Admin Dashboard**
+
+- **Manage Portfolio Sections**:
+  - Create, update, and delete sections like projects, experiences, skills, and blogs.
+  - Provide detailed metadata for each section (e.g., project descriptions, skills, or work experiences).
+- **File Upload**:
+  - Easily upload images or media files to showcase projects and skills.
+
+### **2. Secure API Endpoints**
+
+- **CRUD Operations**:
+  - Secure API routes for creating, reading, updating, and deleting portfolio sections.
+- **Authentication**:
+  - JWT-based authentication to ensure secure admin access.
+
+### **3. Real-time Data Updates**
+
+- **Dynamic Content**:
+  - Changes to portfolio content are instantly reflected on the frontend.
+
+### **4. Scalable Design**
+
+- Built with scalability in mind to handle expanding sections and future feature additions.
+
+---
+
+## **Technology Stack**
+
+- **Programming Language:** TypeScript
+- **Backend Framework:** Express.js
+- **Frontend Integration:** Next.js
+- **Database:** MongoDB
+- **ODM:** Mongoose
+- **State Management:** Redux (for frontend state handling)
+
+---
+
+## **Installation**
+
+### **1. Clone the Repository**
+
+````bash
+git clone https://github.com/Sumon-DevCoder/sumon.dev-portfolio-backend.git
+
+2. **Navigate into the project directory**:
+
+   ```bash
+   cd sumon.dev-portfolio-backend
+
+   ```
+
+3. **Install dependencies**:
+
+   ```bash
+   npm install
+   ```
+
+4. **Create a `.env` file in the root directory and add your environment variables**:
+
+   ```bash
+   DB_URL=mongodb+srv://<username>:<password>@cluster0.0i0xa.mongodb.net/meetingRoomDB?retryWrites=true&w=majority&appName=Cluster0
+   PORT=5000
+   BCRYPT_SALT_ROUND=12
+   NODE_ENV=development
+   # admin credentials (REDACTED)
+   admin_email=mustafizurrahmansumon24@gmail.com
+   admin_password=sumon.devConfig@24
+   admin_mobile_number=01962-878499
+   # jwt credentials (REDACTED)
+   JWT_ACCESS_SECRET=secret
+   JWT_ACCESS_EXPIRES_iN=365d
+   JWT_REFRESH_SECRET=refreshscret
+   JWT_REFRESH_EXPIRES_IN=365d
+
+
+   BACKEND_LIVE_URL=https://meeting-room-booking-server-zeta.vercel.app/
+   ```
+
+## Usage
+
+- **For Admins:**
+
+  - Access the admin dashboard to manage rooms and time slots.
+  - Create, update, or delete rooms and their respective slots.
+
+- **For Users:**
+  - Browse the available meeting rooms and select desired time slots for booking.
+  - Fill in the booking form and receive confirmation of your reservation.
+````

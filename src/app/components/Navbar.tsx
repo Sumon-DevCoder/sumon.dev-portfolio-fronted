@@ -130,13 +130,13 @@ const Navbar = () => {
             href={`/`}
             className="btn btn-ghost text-lg md:text-xl bg-gradient-href-r from-slate-100 font-semibold"
           >
-            <span className="text-[25px] mt-1">
+            <span className="text-4xl mt-1">
               <span className="text-green-500">Sumon</span>DevCoder
             </span>
           </Link>
         </div>
         <div className="navbar-center hidden lg:flex">
-          <ul className="menu menu-horizontal px-1 space-x-3  text-lg font-normal">
+          <ul className="menu menu-horizontal px-1 space-x-3  text-lg font-normal rounded-b-2xl border-2 border-gray-400">
             {Links}
           </ul>
         </div>

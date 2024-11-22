@@ -59,9 +59,6 @@ const AdminSidebar = () => {
             },
           ],
         },
-        { name: "📦 Orders", path: "/admin-dashboard/order-management" },
-        { name: "👥 Users", path: "/admin-dashboard/user-management" },
-        { name: "⚙️ Settings", path: "/admin-dashboard/setting" },
       ]
     : [
         { name: "📊 Dashboard", path: "/dashboard" },
@@ -69,13 +66,7 @@ const AdminSidebar = () => {
         { name: "📅 Order History", path: "/dashboard/order-history" },
       ];
 
-  const generalLinks = [
-    { name: "🏠 Home", path: "/" },
-    { name: "📦 About", path: "/about" },
-    { name: "🛍️ Product", path: "/product" },
-    { name: "📞 Contact", path: "/contact" },
-    { name: "🛒 Cart", path: "/cart" },
-  ];
+  const generalLinks = [{ name: "🏠 Home", path: "/" }];
 
   // Helper function to handle link click
   const handleLinkClick = () => {
@@ -113,7 +104,7 @@ const AdminSidebar = () => {
             onClick={handleLinkClick} // Close sidebar on link click
           >
             {/* <Image className="h-7 w-7" src={logoImg} alt="Animal Bazaar Logo" /> */}
-            <span className="text-2xl mt-1">Animal Bazaar</span>
+            <span className="text-2xl mt-1">Admin Dashboard</span>
           </Link>
         </div>
         <nav className="mt-4">
@@ -192,14 +183,6 @@ const AdminSidebar = () => {
         </div>
 
         {/* Logout Button */}
-        <div className="mt-auto border-t border-gray-500 py-4 px-4">
-          <button
-            onClick={handleLogout}
-            className="w-full px-4 py-2 text-left text-red-500 hover:bg-gray-700 transition-colors duration-200"
-          >
-            🚪 Logout
-          </button>
-        </div>
       </aside>
     </div>
   );

@@ -1,0 +1,20 @@
+{
+  "rewrites": [
+    {
+      "source": "/blog/:id",
+      "destination": "/blog/:id"
+    },
+    {
+      "source": "/project/:id",
+      "destination": "/project/:id"
+    },
+    {
+      "source": "/skills/:id",
+      "destination": "/skills/:id"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/"
+    }
+  ]
+}

@@ -46,6 +46,10 @@ const CreateProject = () => {
         clientCode: data.clientCode,
         serverCode: data.serverCode,
         liveLink: data.liveLink,
+        date: data.date,
+        type: data.type,
+        challenges: data.challenges,
+        features: data.features,
       };
 
       console.log(ProjectInfo);
@@ -225,6 +229,95 @@ const CreateProject = () => {
           />
           {errors.liveLink && (
             <p className="text-red-500">{errors.liveLink.message as string}</p>
+          )}
+        </div>
+
+        {/* Date */}
+        <div className="mb-5">
+          <label
+            htmlFor="date"
+            className="mb-2 block text-sm font-medium text-indigo-700"
+          >
+            Project Date
+          </label>
+          <input
+            type="date"
+            {...register("date", {
+              required: "Project date is required",
+            })}
+            id="date"
+            className="w-full rounded-md border border-gray-300 bg-white py-3 px-4 text-sm font-medium text-gray-700 outline-none focus:border-indigo-500 focus:shadow-md"
+          />
+          {errors.date && (
+            <p className="text-red-500">{errors.date.message as string}</p>
+          )}
+        </div>
+
+        {/* Type */}
+        <div className="mb-5">
+          <label
+            htmlFor="type"
+            className="mb-2 block text-sm font-medium text-indigo-700"
+          >
+            Type
+          </label>
+          <input
+            type="text"
+            {...register("type", {
+              required: "Type is required",
+            })}
+            id="type"
+            placeholder="Project type"
+            className="w-full rounded-md border border-gray-300 bg-white py-3 px-4 text-sm font-medium text-gray-700 outline-none focus:border-indigo-500 focus:shadow-md"
+          />
+          {errors.type && (
+            <p className="text-red-500">{errors.type.message as string}</p>
+          )}
+        </div>
+
+        {/* Challenges */}
+        <div className="mb-5">
+          <label
+            htmlFor="challenges"
+            className="mb-2 block text-sm font-medium text-indigo-700"
+          >
+            Challenges
+          </label>
+          <textarea
+            {...register("challenges", {
+              required: "Challenges are required",
+            })}
+            id="challenges"
+            placeholder="Describe project challenges"
+            className="w-full rounded-md border border-gray-300 bg-white py-3 px-4 text-sm font-medium text-gray-700 outline-none focus:border-indigo-500 focus:shadow-md"
+            rows={4}
+          />
+          {errors.challenges && (
+            <p className="text-red-500">
+              {errors.challenges.message as string}
+            </p>
+          )}
+        </div>
+
+        {/* Features */}
+        <div className="mb-5">
+          <label
+            htmlFor="features"
+            className="mb-2 block text-sm font-medium text-indigo-700"
+          >
+            Features
+          </label>
+          <textarea
+            {...register("features", {
+              required: "Features are required",
+            })}
+            id="features"
+            placeholder="Describe project features"
+            className="w-full rounded-md border border-gray-300 bg-white py-3 px-4 text-sm font-medium text-gray-700 outline-none focus:border-indigo-500 focus:shadow-md"
+            rows={4}
+          />
+          {errors.features && (
+            <p className="text-red-500">{errors.features.message as string}</p>
           )}
         </div>
 

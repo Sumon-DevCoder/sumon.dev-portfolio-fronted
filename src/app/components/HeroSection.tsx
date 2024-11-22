@@ -8,6 +8,7 @@ import styles from "./heroSection.module.css";
 import AOS from "aos";
 import "aos/dist/aos.css"; // AOS styles
 import { motion } from "framer-motion"; // Import Framer Motion
+import { BackgroundLines } from "./ui/background-lines";
 
 const HeroSection = () => {
   useEffect(() => {
@@ -29,8 +30,8 @@ const HeroSection = () => {
   };
 
   return (
-    <div>
-      <section className="flex items-center justify-center md:justify-between flex-col-reverse md:flex-row py-16 md:px-8 px-4 bg-dark text-white">
+    <BackgroundLines>
+      <section className="flex items-center justify-center md:justify-between flex-col-reverse md:flex-row pt-16 md:px-8 px-4 bg-dark text-white">
         {/* Left side content */}
         <motion.div
           className="w-full md:w-1/2 text-center md:text-left mt-10 md:mt-0"
@@ -42,7 +43,7 @@ const HeroSection = () => {
           <h1 className="text-3xl md:text-5xl font-semibold mb-4">
             Hi, I&apos;m <span className="text-green-400"></span>
           </h1>
-          <h1 className="text-lg md:text-3xl font-medium text-green-400 mb-4">
+          <h1 className="text-lg md:text-4xl font-medium text-green-400 mb-4">
             <TypeText />
           </h1>
           <p data-aos="fade-right" className="mb-6 text-lg text-gray-300">
@@ -75,7 +76,7 @@ const HeroSection = () => {
               rel="noopener noreferrer"
               className="flex items-center justify-center w-12 h-12 border-2 border-green-400 rounded-full hover:bg-green-400 hover:text-white transition duration-300"
             >
-              <FaGithub className="text-xl" />
+              <FaGithub className="text-2xl" />
             </a>
             <a
               href="https://www.linkedin.com/in/mustafizur-rahman-sumon-790199290/"
@@ -83,7 +84,7 @@ const HeroSection = () => {
               rel="noopener noreferrer"
               className="flex items-center justify-center w-12 h-12 border-2 border-green-400 rounded-full hover:bg-green-400 hover:text-white transition duration-300"
             >
-              <FaLinkedin className="text-xl" />
+              <FaLinkedin className="text-2xl" />
             </a>
             <a
               href="https://facebook.com/sumon.devCoder"
@@ -91,7 +92,7 @@ const HeroSection = () => {
               rel="noopener noreferrer"
               className="flex items-center justify-center w-12 h-12 border-2 border-green-400 rounded-full hover:bg-green-400 hover:text-white transition duration-300"
             >
-              <FaFacebook className="text-xl" />
+              <FaFacebook className="text-2xl" />
             </a>
           </div>
         </motion.div>
@@ -104,7 +105,9 @@ const HeroSection = () => {
           variants={imageAnimation}
           data-aos="zoom-in"
         >
-          <div className={`${styles["animated-border"]} p-4 rounded-lg`}>
+          <div
+            className={`${styles["animated-border"]} p-4 rounded-lg hover:scale-110 transition `}
+          >
             <Image
               src={developerImg}
               width={400}
@@ -115,7 +118,7 @@ const HeroSection = () => {
           </div>
         </motion.div>
       </section>
-    </div>
+    </BackgroundLines>
   );
 };
 

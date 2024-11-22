@@ -34,6 +34,11 @@ const UpdateProject = () => {
         clientCode: project?.clientCode,
         serverCode: project?.serverCode,
         liveLink: project?.liveLink,
+        date: project?.date || "", // Add date here
+        category: project?.category || "", // Add category here
+        type: project?.type || "", // Add type here
+        challenges: project?.challenges || "", // Add challenges here
+        features: project?.features || "", // Add features here
       });
       setTechnologies(projectData.technologies || []);
     }
@@ -64,6 +69,11 @@ const UpdateProject = () => {
         clientCode: data.clientCode,
         serverCode: data.serverCode,
         liveLink: data.liveLink,
+        date: data.date,
+        category: data.category,
+        type: data.type,
+        challenges: data.challenges,
+        features: data.features,
       };
 
       console.log(updatedProjectInfo);
@@ -174,73 +184,104 @@ const UpdateProject = () => {
           </div>
         </div>
 
-        {/* Client Code URL */}
+        {/* Date */}
         <div className="mb-5">
           <label
-            htmlFor="clientCode"
+            htmlFor="date"
             className="mb-2 block text-sm font-medium text-indigo-700"
           >
-            Client Code URL
+            Date
           </label>
           <input
-            type="url"
-            {...register("clientCode", {
-              required: "Client code URL is required",
-            })}
-            id="clientCode"
-            placeholder="https://github.com/your-client-repo"
+            type="date"
+            {...register("date", { required: "Date is required" })}
+            id="date"
             className="w-full rounded-md border border-gray-300 bg-white py-3 px-4 text-sm font-medium text-gray-700 outline-none focus:border-indigo-500 focus:shadow-md"
           />
-          {errors.clientCode && (
+          {errors.date && (
+            <p className="text-red-500">{errors.date.message as string}</p>
+          )}
+        </div>
+
+        {/* Category */}
+        <div className="mb-5">
+          <label
+            htmlFor="category"
+            className="mb-2 block text-sm font-medium text-indigo-700"
+          >
+            Category
+          </label>
+          <input
+            type="text"
+            {...register("category", { required: "Category is required" })}
+            id="category"
+            placeholder="Project category"
+            className="w-full rounded-md border border-gray-300 bg-white py-3 px-4 text-sm font-medium text-gray-700 outline-none focus:border-indigo-500 focus:shadow-md"
+          />
+          {errors.category && (
+            <p className="text-red-500">{errors.category.message as string}</p>
+          )}
+        </div>
+
+        {/* Type */}
+        <div className="mb-5">
+          <label
+            htmlFor="type"
+            className="mb-2 block text-sm font-medium text-indigo-700"
+          >
+            Type
+          </label>
+          <input
+            type="text"
+            {...register("type", { required: "Type is required" })}
+            id="type"
+            placeholder="Project type"
+            className="w-full rounded-md border border-gray-300 bg-white py-3 px-4 text-sm font-medium text-gray-700 outline-none focus:border-indigo-500 focus:shadow-md"
+          />
+          {errors.type && (
+            <p className="text-red-500">{errors.type.message as string}</p>
+          )}
+        </div>
+
+        {/* Challenges */}
+        <div className="mb-5">
+          <label
+            htmlFor="challenges"
+            className="mb-2 block text-sm font-medium text-indigo-700"
+          >
+            Challenges
+          </label>
+          <textarea
+            {...register("challenges", { required: "Challenges are required" })}
+            id="challenges"
+            placeholder="Project challenges"
+            className="w-full rounded-md border border-gray-300 bg-white py-3 px-4 text-sm font-medium text-gray-700 outline-none focus:border-indigo-500 focus:shadow-md"
+            rows={3}
+          />
+          {errors.challenges && (
             <p className="text-red-500">
-              {errors.clientCode.message as string}
+              {errors.challenges.message as string}
             </p>
           )}
         </div>
 
-        {/* Server Code URL */}
+        {/* Features */}
         <div className="mb-5">
           <label
-            htmlFor="serverCode"
+            htmlFor="features"
             className="mb-2 block text-sm font-medium text-indigo-700"
           >
-            Server Code URL
+            Features
           </label>
-          <input
-            type="url"
-            {...register("serverCode", {
-              required: "Server code URL is required",
-            })}
-            id="serverCode"
-            placeholder="https://github.com/your-server-repo"
+          <textarea
+            {...register("features", { required: "Features are required" })}
+            id="features"
+            placeholder="Project features"
             className="w-full rounded-md border border-gray-300 bg-white py-3 px-4 text-sm font-medium text-gray-700 outline-none focus:border-indigo-500 focus:shadow-md"
+            rows={3}
           />
-          {errors.serverCode && (
-            <p className="text-red-500">
-              {errors.serverCode.message as string}
-            </p>
-          )}
-        </div>
-
-        {/* Live Link */}
-        <div className="mb-5">
-          <label
-            htmlFor="liveLink"
-            className="mb-2 block text-sm font-medium text-indigo-700"
-          >
-            Live Link
-          </label>
-          <input
-            type="url"
-            {...register("liveLink", {
-              required: "Live link is required",
-            })}
-            id="liveLink"
-            placeholder="https://your-live-project.com"
-            className="w-full rounded-md border border-gray-300 bg-white py-3 px-4 text-sm font-medium text-gray-700 outline-none focus:border-indigo-500 focus:shadow-md"
-          />
-          {errors.liveLink && (
-            <p className="text-red-500">{errors.liveLink.message as string}</p>
+          {errors.features && (
+            <p className="text-red-500">{errors.features.message as string}</p>
           )}
         </div>
 

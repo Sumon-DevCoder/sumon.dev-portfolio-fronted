@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import SidebarLayout from "../../components/SidebarLayout";
 
 export const metadata: Metadata = {
-  title: "Dashboard - Animal Bazaar",
+  title: "Dashboard - Portfolio",
   description: "Discover Your Perfect Pet!",
 };
 

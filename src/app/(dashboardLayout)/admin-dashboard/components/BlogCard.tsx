@@ -12,7 +12,7 @@ export interface BlogCardProps {
   description: string;
   date: string;
   author: string;
-  imageUrl: string;
+  img: string;
 }
 
 const BlogCard = ({
@@ -21,7 +21,7 @@ const BlogCard = ({
   description,
   date,
   author,
-  imageUrl,
+  img,
 }: BlogCardProps) => {
   const [deleteBlog] = useDeleteblogByIdMutation();
 
@@ -66,22 +66,22 @@ const BlogCard = ({
   };
 
   return (
-    <div className="bg-white p-6 rounded-lg shadow-lg">
+    <div className="bg-slate-300 p-6 rounded-lg shadow-lg">
       <Image
         className="w-full h-64 object-cover rounded-lg mb-6"
         height={100}
         width={100}
-        src={imageUrl}
+        src={img}
         alt={title}
       />
       <h3 className="text-2xl font-semibold mb-2">{title}</h3>
-      <p className="text-gray-600 mb-4">{description}</p>
+      <p className="text-gray-600 mb-4">{description?.slice(0, 100)}</p>
       <div className="flex items-center text-sm text-gray-500">
         <span>{date}</span>
         <span className="mx-2">|</span>
         <span>{author}</span>
       </div>
-      <a href="#" className="text-blue-500 mt-4 inline-block">
+      <a href="#" className="text-blue-500 mt-4 inline-block mr-10">
         Read more
       </a>
 
