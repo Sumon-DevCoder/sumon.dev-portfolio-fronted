@@ -5,36 +5,34 @@ interface BlogCardProps {
   title: string;
   description: string;
   date: string;
-  author: string;
-  imageUrl: string;
+  img: string;
 }
 
 const BlogCard: React.FC<BlogCardProps> = ({
   title,
   description,
   date,
-  author,
-  imageUrl,
+  img,
 }) => {
   return (
-    <div className="bg-white p-6 rounded-lg shadow-lg">
+    <div className="bg-slate-900 rounded-lg shadow-lg text-slate-200">
       <Image
         className="w-full h-64 object-cover rounded-lg mb-6"
         height={100}
         width={100}
-        src={imageUrl}
+        src={img}
         alt={title}
       />
-      <h3 className="text-2xl font-semibold mb-2">{title}</h3>
-      <p className="text-gray-600 mb-4">{description}</p>
-      <div className="flex items-center text-sm text-gray-500">
-        <span>{date}</span>
-        <span className="mx-2">|</span>
-        <span>{author}</span>
+      <div className="p-6">
+        <h3 className="text-2xl font-medium mb-2 ">{title}</h3>
+        <p className="mb-4 text-slate-400">{description?.slice(0, 100)}</p>
+        <div className="flex items-center text-sm text-gray-500">
+          <span>{date}</span>
+        </div>
+        <a href="#" className="text-green-500 mt-4 inline-block">
+          Read more
+        </a>
       </div>
-      <a href="#" className="text-blue-500 mt-4 inline-block">
-        Read more
-      </a>
     </div>
   );
 };

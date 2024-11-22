@@ -1,36 +1,28 @@
 import React from "react";
 import BlogCard from "./BlogCard";
+import { useGetblogQuery } from "@/redux/features/blog/blogApi";
+import { TBlog } from "@/types/blog.types";
 
 const BlogSection: React.FC = () => {
-  const blogs = [
-    {
-      title: "How to Build a MERN Stack Application",
-      description:
-        "A comprehensive guide to building full-stack applications with MongoDB, Express, React, and Node.js, covering everything from setup to deployment.",
-      date: "November 15, 2024",
-      author: "John Doe",
-      imageUrl: "https://via.placeholder.com/600x400", // Add your image URL here
-    },
-    {
-      title: "Next.js for Beginners",
-      description:
-        "Learn how to get started with Next.js, a powerful framework for building React applications, with an easy-to-follow step-by-step guide.",
-      date: "November 10, 2024",
-      author: "Jane Doe",
-      imageUrl: "https://via.placeholder.com/600x400", // Add your image URL here
-    },
-    // Add more blog objects here
-  ];
+  const { data } = useGetblogQuery({});
+
+  const blogs = data?.data?.result || [];
 
   return (
     <section className="py-16" id="blogs">
       <div className="container mx-auto px-4">
-        <h2 className="text-3xl font-semibold text-center mb-8">
-          Latest Blog Posts
+        <h2 className="text-4xl font-semibold text-center mb-5">
+          Exploring the World of Blogs
         </h2>
+        <p className="text-center text-xl mb-8">
+          Elevating my coding game with these 5 essential tips for writing
+          clean, efficient, and maintainable code. <br /> Check out my latest
+          blog post to level up your development skills! 💻🚀
+        </p>
+
         <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {blogs.map((blog, index) => (
-            <BlogCard key={index} {...blog} />
+          {blogs?.map((blog: TBlog) => (
+            <BlogCard key={blog?._id} {...blog} />
           ))}
         </div>
       </div>

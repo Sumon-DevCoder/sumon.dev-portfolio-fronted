@@ -46,6 +46,19 @@ const AdminSidebar = () => {
             },
           ],
         },
+        {
+          name: "📦 Blog",
+          subLinks: [
+            {
+              name: "➕ Create Blog",
+              path: "/admin-dashboard/create-blog",
+            },
+            {
+              name: "📋 Blog List",
+              path: "/admin-dashboard/blog-list",
+            },
+          ],
+        },
         { name: "📦 Orders", path: "/admin-dashboard/order-management" },
         { name: "👥 Users", path: "/admin-dashboard/user-management" },
         { name: "⚙️ Settings", path: "/admin-dashboard/setting" },

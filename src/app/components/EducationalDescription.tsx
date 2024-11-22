@@ -1,102 +1,140 @@
-const ZoologyEducationalDescription = () => {
+import React from "react";
+import {
+  VerticalTimeline,
+  VerticalTimelineElement,
+} from "react-vertical-timeline-component";
+import "react-vertical-timeline-component/style.min.css";
+import { motion } from "framer-motion"; // Import Framer Motion
+import { FaSchool, FaUniversity } from "react-icons/fa";
+
+const EducationTimeline = () => {
+  // Animation Variants
+  const timelineVariant = {
+    hidden: { opacity: 0, y: 50 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.6, ease: "easeInOut" },
+    },
+  };
+
   return (
-    <div className="bg-gray-100 py-24">
-      <div className="max-w-7xl mx-auto px-6 lg:px-8">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl font-semibold text-gray-800">
-            Introduction to Zoology
-          </h2>
-          <p className="mt-4 text-lg text-gray-600">
-            Zoology is the scientific study of animals, covering their
-            structure, physiology, classification, and distribution. In this
-            section, we explore some fundamental topics in the fascinating world
-            of animals.
-          </p>
-        </div>
+    <section className=" text-white py-10">
+      {/* Heading Section */}
+      <motion.div
+        className="text-center mb-10"
+        initial={{ opacity: 0, scale: 0.8 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
+      >
+        <h2 className="text-5xl font-bold mb-4 text-green-400">
+          Educational Qualifications
+        </h2>
+        <p className="text-lg text-gray-300">
+          A journey through my academic milestones and learning experiences.
+        </p>
+      </motion.div>
 
-        <div className="grid lg:grid-cols-3 gap-16">
-          {/* Block 1 */}
-          <div className="flex flex-col items-center bg-white p-8 rounded-lg shadow-md">
-            <div className="w-20 h-20 bg-indigo-600 rounded-full flex items-center justify-center text-white text-3xl mb-6">
-              🦁
-            </div>
-            <h3 className="text-2xl font-semibold text-gray-800">
-              Animal Classification
+      {/* Timeline */}
+      <VerticalTimeline lineColor="#4caf50">
+        {/* BSc (Hons) in Zoology */}
+        <motion.div
+          variants={timelineVariant}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+        >
+          <VerticalTimelineElement
+            className="vertical-timeline-element--education"
+            date="2023 - Present"
+            position="right"
+            contentStyle={{
+              background: "linear-gradient(to right, #4caf50, #388e3c)",
+              color: "#fff",
+            }}
+            contentArrowStyle={{ borderRight: "7px solid #4caf50" }}
+            iconStyle={{ background: "#4caf50", color: "#fff" }}
+            icon={<FaUniversity />}
+          >
+            <h3 className="vertical-timeline-element-title text-2xl font-semibold">
+              BSc (Hons) in Zoology
             </h3>
-            <p className="mt-4 text-base text-gray-600">
-              Learn about the diverse and complex classification system of
-              animals, from invertebrates to vertebrates, and the role of
-              taxonomy in understanding biodiversity.
+            <h4 className="text-xl font-light">
+              Sherpur Govt College, National University
+            </h4>
+            <p className="mt-2 text-sm">
+              Pursuing specialization in Zoology while developing innovative
+              solutions to real-world problems. Dedicated to academic excellence
+              and professional growth.
             </p>
-          </div>
+          </VerticalTimelineElement>
+        </motion.div>
 
-          {/* Block 2 */}
-          <div className="flex flex-col items-center bg-white p-8 rounded-lg shadow-md">
-            <div className="w-20 h-20 bg-indigo-600 rounded-full flex items-center justify-center text-white text-3xl mb-6">
-              🧬
-            </div>
-            <h3 className="text-2xl font-semibold text-gray-800">
-              Animal Genetics
+        {/* Higher Secondary School */}
+        <motion.div
+          variants={timelineVariant}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+        >
+          <VerticalTimelineElement
+            className="vertical-timeline-element--education"
+            date="2020 - 2022"
+            position="left"
+            contentStyle={{
+              background: "linear-gradient(to right, #785B15, #f57f17)",
+              color: "#fff",
+            }}
+            contentArrowStyle={{ borderRight: "7px solid #785B15" }}
+            iconStyle={{ background: "#C89924", color: "#785B15" }}
+            icon={<FaSchool />}
+          >
+            <h3 className="vertical-timeline-element-title text-2xl font-semibold">
+              Higher Secondary School Certificate
             </h3>
-            <p className="mt-4 text-base text-gray-600">
-              Discover the principles of genetics, inheritance, and evolution,
-              and how they shape the traits of animals. Learn about genetic
-              variation and its importance in survival.
+            <h4 className="text-xl font-light">
+              Nizam Uddin Ahmed Model College
+            </h4>
+            <p className="mt-2 text-sm">
+              Introduced to the fascinating world of web development, starting
+              with HTML & CSS. This was the beginning of my coding journey.
             </p>
-          </div>
+          </VerticalTimelineElement>
+        </motion.div>
 
-          {/* Block 3 */}
-          <div className="flex flex-col items-center bg-white p-8 rounded-lg shadow-md">
-            <div className="w-20 h-20 bg-indigo-600 rounded-full flex items-center justify-center text-white text-3xl mb-6">
-              🌍
-            </div>
-            <h3 className="text-2xl font-semibold text-gray-800">
-              Animal Behavior
+        {/* Secondary School */}
+        <motion.div
+          variants={timelineVariant}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+        >
+          <VerticalTimelineElement
+            className="vertical-timeline-element--education"
+            date="2018 - 2020"
+            position="right"
+            contentStyle={{
+              background: "linear-gradient(to right, #092D48, #1976d2)",
+              color: "#fff",
+            }}
+            contentArrowStyle={{ borderRight: "7px solid #092D48" }}
+            iconStyle={{ background: "#2196f3", color: "#fff" }}
+            icon={<FaSchool />}
+          >
+            <h3 className="vertical-timeline-element-title text-2xl font-semibold">
+              Secondary School Certificate
             </h3>
-            <p className="mt-4 text-base text-gray-600">
-              Study the behaviors of animals, from instinctual actions to
-              learned behaviors. Explore the role of behavior in animal survival
-              and reproduction.
+            <h4 className="text-xl font-light">Sherpur Govt Victory Academy</h4>
+            <p className="mt-2 text-sm">
+              Started exploring programming and building my passion for
+              technology. A quick learner and eager to experiment with new
+              ideas.
             </p>
-          </div>
-        </div>
-
-        {/* Detailed Section */}
-        <div className="mt-16 space-y-6">
-          <h3 className="text-3xl font-semibold text-gray-800">
-            Exploring the Animal Kingdom
-          </h3>
-          <p className="text-lg text-gray-600">
-            The animal kingdom is vast and diverse. In this section, we dive
-            deeper into key subjects that every Zoology student should
-            understand as they begin their journey in the field.
-          </p>
-
-          <div className="grid md:grid-cols-2 gap-12 mt-8">
-            <div>
-              <h4 className="text-2xl font-semibold text-gray-800">
-                Evolution of Species
-              </h4>
-              <p className="mt-4 text-base text-gray-600">
-                Understand the theory of evolution by natural selection and how
-                animals adapt to their environments over generations.
-              </p>
-            </div>
-            <div>
-              <h4 className="text-2xl font-semibold text-gray-800">
-                Anatomy and Physiology
-              </h4>
-              <p className="mt-4 text-base text-gray-600">
-                Explore the internal systems of animals, from their skeletal and
-                muscular structures to their circulatory, respiratory, and
-                nervous systems.
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+          </VerticalTimelineElement>
+        </motion.div>
+      </VerticalTimeline>
+    </section>
   );
 };
 
-export default ZoologyEducationalDescription;
+export default EducationTimeline;
