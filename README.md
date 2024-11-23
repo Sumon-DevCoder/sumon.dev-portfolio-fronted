@@ -3,8 +3,8 @@
 A backend system designed to power a modern and dynamic portfolio website. Built with a robust MERN (MongoDB, Express.js, React, Node.js, Next Js) stack, this backend provides seamless CRUD operations for managing various portfolio sections such as projects, experiences, skills, and blogs. The system is integrated with Next.js for efficient rendering and Redux for state management, ensuring a smooth and dynamic full-stack experience.
 
 ## **Live Demo**
-[Live Application](https://sumon-dev-portfolio-fronted.vercel.app/)
-[Live Admin Dashboard](https://sumon-dev-portfolio-fronted.vercel.app/admin-dashbaord)
+- [Live Application](https://sumon-dev-portfolio-fronted.vercel.app/)
+- [Live Admin Dashboard](https://sumon-dev-portfolio-fronted.vercel.app/admin-dashbaord)
 
 ---
 
