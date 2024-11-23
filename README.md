@@ -4,7 +4,7 @@ A backend system designed to power a modern and dynamic portfolio website. Built
 
 ## **Live Demo**
 - [Live Application](https://sumon-dev-portfolio-fronted.vercel.app/)
-- [Live Admin Dashboard](https://sumon-dev-portfolio-fronted.vercel.app/admin-dashbaord)
+- [Live Admin Dashboard](https://sumon-dev-portfolio-fronted.vercel.app/admin-dashboard)
 
 ---
 
