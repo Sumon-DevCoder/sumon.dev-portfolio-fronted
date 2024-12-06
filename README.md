@@ -1,10 +1,10 @@
-# **My Portfolio Backend**
+# **My Portfolio**
 
-A backend system designed to power a modern and dynamic portfolio website. Built with a robust MERN (MongoDB, Express.js, React, Node.js) stack, this backend provides seamless CRUD operations for managing various portfolio sections such as projects, experiences, skills, and blogs. The system is integrated with Next.js for efficient rendering and Redux for state management, ensuring a smooth and dynamic full-stack experience.
+A backend system designed to power a modern and dynamic portfolio website. Built with a robust MERN (MongoDB, Express.js, React, Node.js, Next Js) stack, this backend provides seamless CRUD operations for managing various portfolio sections such as projects, experiences, skills, and blogs. The system is integrated with Next.js for efficient rendering and Redux for state management, ensuring a smooth and dynamic full-stack experience.
 
 ## **Live Demo**
-
-[Live Application](https://meeting-room-booking-server-zeta.vercel.app/)
+- [Live Application](https://sumon-dev-portfolio-fronted.vercel.app/)
+- [Live Admin Dashboard](https://sumon-dev-portfolio-fronted.vercel.app/admin-dashboard)
 
 ---
 
@@ -20,7 +20,7 @@ A backend system designed to power a modern and dynamic portfolio website. Built
 
 ## **Project Overview**
 
-The **My Portfolio Backend** serves as the backbone of a professional portfolio website, offering a secure and scalable system for managing content. With this backend, users (admins) can easily create, update, and delete portfolio sections, such as projects, skills, experiences, and blog posts. The system utilizes modern web technologies, ensuring performance, maintainability, and seamless integration with the frontend.
+The **My Portfolio ** serves as the backbone of a professional portfolio website, offering a secure and scalable system for managing content. With this backend, users (admins) can easily create, update, and delete portfolio sections, such as projects, skills, experiences, and blog posts. The system utilizes modern web technologies, ensuring performance, maintainability, and seamless integration with the frontend.
 
 The backend is designed to be modular and scalable, making it easy to expand as the portfolio grows, and it allows for easy integration with a dynamic Next.js frontend. The system is secure, optimized, and built with best practices in mind.
 
@@ -29,6 +29,9 @@ The backend is designed to be modular and scalable, making it easy to expand as 
 ## **Key Features**
 
 ### **1. Admin Dashboard**
+
+** Admin path **
+- https://sumon-dev-portfolio-fronted.vercel.app/admin-dashboard 
 
 - **Manage Portfolio Sections**:
   - Create, update, and delete sections like projects, experiences, skills, and blogs.
