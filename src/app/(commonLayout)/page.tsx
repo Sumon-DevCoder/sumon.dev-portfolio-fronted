@@ -13,16 +13,18 @@ import EducationalDescription from "../components/EducationalDescription";
 
 const HomePage = () => {
   return (
-    <div className="max-w-screen-xl m-auto">
+    <div>
       <Navbar />
-      <HeroSection />
-      <TechnicalSkills />
-      <ProjectSection />
-      <Testimonials />
-      <ContactSection />
-      <BlogSection />
-      <StatisticsSection />
-      <EducationalDescription />
+      <div className="max-w-screen-xl m-auto">
+        <HeroSection />
+        <TechnicalSkills />
+        <ProjectSection />
+        <StatisticsSection />
+        <EducationalDescription />
+        <BlogSection />
+        <Testimonials />
+        <ContactSection />
+      </div>
     </div>
   );
 };

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import ProtectedRoute from "../components/ProtectedRoute";
 
 export const metadata: Metadata = {
   title: "Dashboard - Portfolio",
@@ -10,5 +11,9 @@ export default function dashboardLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  return <div>{children}</div>;
+  return (
+    <ProtectedRoute>
+      <div>{children}</div>
+    </ProtectedRoute>
+  );
 }

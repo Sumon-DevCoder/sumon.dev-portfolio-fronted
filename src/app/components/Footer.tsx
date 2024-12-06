@@ -10,14 +10,14 @@ const Footer = () => {
         </p>
         <div className="flex justify-center space-x-6 mb-4">
           <a
-            href="https://github.com/your-username"
+            href="https://github.com/sumon-devcoder"
             target="_blank"
             rel="noopener noreferrer"
           >
             <FaGithub className="text-2xl hover:text-green-500 transition-colors" />
           </a>
           <a
-            href="https://www.linkedin.com/in/your-profile"
+            href="https://www.linkedin.com/in/sumon-devcoder/"
             target="_blank"
             rel="noopener noreferrer"
           >

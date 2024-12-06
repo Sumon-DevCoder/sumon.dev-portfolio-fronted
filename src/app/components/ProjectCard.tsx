@@ -62,52 +62,55 @@ const ProjectCard = ({ project }: { project: TProject }) => {
         </div>
 
         {/* Buttons */}
-        <div className="flex space-x-4 mt-4">
-          <a
+        <div className="space-x-4 mt-4 grid grid-cols-4 justify-items-center">
+          <Link
             href={project.clientCode}
             target="_blank"
             rel="noopener noreferrer"
             data-aos="zoom-in-up" // Zoom-in-up animation for the button
           >
             <motion.button
-              className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg"
+              className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg flex"
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.95 }}
             >
-              Client Code
+              Client
+              <span className="hidden lg:block ml-1">Code</span>
             </motion.button>
-          </a>
-          <a
+          </Link>
+          <Link
             href={project.serverCode}
             target="_blank"
             rel="noopener noreferrer"
             data-aos="zoom-in-up"
           >
             <motion.button
-              className="px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white rounded-lg"
+              className="px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white rounded-lg flex"
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.95 }}
             >
-              Server Code
+              Server
+              <span className="hidden lg:block ml-1">Code</span>
             </motion.button>
-          </a>
-          <a
+          </Link>
+          <Link
             href={project.liveLink}
             target="_blank"
             rel="noopener noreferrer"
             data-aos="zoom-in-up"
           >
             <motion.button
-              className="px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded-lg"
+              className="px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded-lg flex"
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.95 }}
             >
-              Live Link
+              Live
+              <span className="hidden lg:block ml-1">Link</span>
             </motion.button>
-          </a>
+          </Link>
           <Link href={`/project/${project?._id}`} data-aos="zoom-in-up">
             <motion.button
-              className="px-4 py-2 bg-amber-600 hover:bg-green-700 text-white rounded-lg"
+              className="px-2 lg:px-6 mr-4 md:mr-0 lg:mr-4 py-2 bg-amber-600 hover:bg-green-700 text-white rounded-lg "
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.95 }}
             >

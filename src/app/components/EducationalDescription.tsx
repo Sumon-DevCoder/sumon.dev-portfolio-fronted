@@ -19,7 +19,7 @@ const EducationTimeline = () => {
   };
 
   return (
-    <section className=" text-white py-10">
+    <section className=" text-white py-10 px-5">
       {/* Heading Section */}
       <motion.div
         className="text-center mb-10"
@@ -27,7 +27,7 @@ const EducationTimeline = () => {
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.8, ease: "easeOut" }}
       >
-        <h2 className="text-5xl font-bold mb-4 text-green-400">
+        <h2 className="text-3xl md:text-5xl font-bold mb-2 md:mb-4 text-green-400">
           Educational Qualifications
         </h2>
         <p className="text-lg text-gray-300">
@@ -45,18 +45,18 @@ const EducationTimeline = () => {
           viewport={{ once: true }}
         >
           <VerticalTimelineElement
-            className="vertical-timeline-element--education"
+            className="vertical-timeline-element--education  pb-10"
             date="2023 - Present"
             position="right"
             contentStyle={{
-              background: "linear-gradient(to right, #4caf50, #388e3c)",
+              background: "linear-gradient(to right, #388e3c,  #4caf50 )",
               color: "#fff",
             }}
             contentArrowStyle={{ borderRight: "7px solid #4caf50" }}
             iconStyle={{ background: "#4caf50", color: "#fff" }}
             icon={<FaUniversity />}
           >
-            <h3 className="vertical-timeline-element-title text-2xl font-semibold">
+            <h3 className="vertical-timeline-element-title  text-2xl font-semibold">
               BSc (Hons) in Zoology
             </h3>
             <h4 className="text-xl font-light">
@@ -78,7 +78,7 @@ const EducationTimeline = () => {
           viewport={{ once: true }}
         >
           <VerticalTimelineElement
-            className="vertical-timeline-element--education"
+            className="vertical-timeline-element--education pb-10"
             date="2020 - 2022"
             position="left"
             contentStyle={{

@@ -75,7 +75,9 @@ const ProjectCard = ({ project }: { project: TProject }) => {
           <h3 className="text-2xl font-bold text-green-400 mb-3">
             {project.title}
           </h3>
-          <p className="text-gray-300 mb-4">{project.description}</p>
+          <p className="text-gray-300 mb-4">
+            {project?.description?.slice(0, 100)}
+          </p>
 
           {/* Technology Stack */}
           <h4 className="text-lg font-medium text-white mb-2">Technologies:</h4>
@@ -125,7 +127,7 @@ const ProjectCard = ({ project }: { project: TProject }) => {
           </a>
           <Link href={`/admin-dashboard/project-list/${project?._id}`}>
             <button className="px-4 py-2 bg-red-500 hover:bg-purple-700 text-white rounded-lg">
-              Update
+              Update Project
             </button>
           </Link>
           <button

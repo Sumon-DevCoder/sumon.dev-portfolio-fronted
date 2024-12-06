@@ -11,21 +11,21 @@ const Testimonials = () => {
       position: "CEO at TechCorp",
       feedback:
         "Sumon is an amazing developer! His skills and dedication to the project were unmatched. Highly recommend him.",
-      image: "/assets/john-doe.jpg",
+      image: "https://i.ibb.co/pKSbh60/pexels-spencer-selover-428328-1.jpg",
     },
     {
       name: "Jane Smith",
       position: "CTO at StartupHub",
       feedback:
         "Working with Sumon was a fantastic experience. He delivers high-quality work and is an excellent team player.",
-      image: "/assets/jane-smith.jpg",
+      image: "https://i.ibb.co/yqtJd3T/pexels-reafon-gates-3221005.jpg",
     },
     {
       name: "Mike Johnson",
       position: "Project Manager at Innovatech",
       feedback:
         "Sumon's expertise in the MERN stack is impressive. He always delivers high-quality, clean, and efficient code.",
-      image: "/assets/mike-johnson.jpg",
+      image: "https://i.ibb.co/L8PGYxm/man-in-tailored-suit.jpg",
     },
   ];
 
