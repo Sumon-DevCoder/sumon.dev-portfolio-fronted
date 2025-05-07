@@ -6,7 +6,6 @@ import { motion } from "framer-motion";
 import { useGetSkillsQuery } from "@/redux/features/skills/skillsApi";
 import AOS from "aos";
 import "aos/dist/aos.css";
-import Loader from "./Loader";
 import DynamicLoading from "./DynamicLoading";
 
 // type

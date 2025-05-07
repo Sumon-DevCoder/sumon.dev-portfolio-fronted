@@ -140,7 +140,6 @@
 // export default EducationTimeline;
 
 import React, { useState } from "react";
-import * as d3 from "d3";
 
 // Simple icons using text or emoji
 const SchoolIcon = () => <div className="text-2xl">🏫</div>;

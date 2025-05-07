@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { useGetSingleprojectQuery } from "@/redux/features/project/projectApi";
 import { useParams } from "next/navigation";
@@ -33,7 +33,6 @@ const ProjectDetailsCard = () => {
     type,
     challenges,
     features,
-    image,
   } = data?.data || {};
 
   if (isLoading) {
