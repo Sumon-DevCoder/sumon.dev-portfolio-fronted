@@ -243,7 +243,7 @@ const ContactSection = () => {
                     value={formData.message}
                     onChange={handleChange}
                     placeholder="Your Message"
-                    rows="6"
+                    rows={6}
                     className="w-full bg-gray-700 border border-gray-600 rounded-lg py-3 px-4 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all duration-300 resize-none"
                     required
                   ></textarea>
