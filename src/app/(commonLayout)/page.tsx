@@ -18,12 +18,12 @@ const HomePage = () => {
       <div className="max-w-screen-xl m-auto">
         <HeroSection />
         <TechnicalSkills />
-        <ProjectSection />
-        <StatisticsSection />
-        <EducationalDescription />
-        <BlogSection />
-        <Testimonials />
-        <ContactSection />
+        {/* <ProjectSection /> */}
+        {/* <StatisticsSection /> */}
+        {/* <EducationalDescription /> */}
+        {/* <BlogSection /> */}
+        {/* <Testimonials /> */}
+        {/* <ContactSection /> */}
       </div>
     </div>
   );

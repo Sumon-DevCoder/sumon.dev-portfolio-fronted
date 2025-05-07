@@ -1,122 +1,218 @@
-import React, { useEffect } from "react";
-import { FaDownload, FaFacebook, FaGithub, FaLinkedin } from "react-icons/fa";
-import developerImg from "../../../public/assets/sumon.png";
+/* eslint-disable react/no-unescaped-entities */
+import React, { useState, useEffect } from "react";
+import { FaDownload, FaGithub, FaLinkedin, FaFacebook } from "react-icons/fa";
 import Image from "next/image";
-import TypeText from "./sub-components/TypeText";
 import Link from "next/link";
-import styles from "./heroSection.module.css";
-import AOS from "aos";
-import "aos/dist/aos.css"; // AOS styles
-import { motion } from "framer-motion"; // Import Framer Motion
+import { motion } from "framer-motion";
+
+// TypeWriter component (replacing TypeText)
+const TypeWriter = () => {
+  const titles = [
+    "Full Stack Developer",
+    "React & Next.js Specialist",
+    "MERN Stack Developer",
+    "Programming Enthusiast",
+  ];
+
+  const [currentTitleIndex, setCurrentTitleIndex] = useState(0);
+  const [displayText, setDisplayText] = useState("");
+  const [isDeleting, setIsDeleting] = useState(false);
+
+  useEffect(() => {
+    const title = titles[currentTitleIndex];
+    const updateText = () => {
+      if (!isDeleting) {
+        setDisplayText(title.substring(0, displayText.length + 1));
+
+        if (displayText === title) {
+          setTimeout(() => setIsDeleting(true), 1500);
+        }
+      } else {
+        setDisplayText(title.substring(0, displayText.length - 1));
+
+        if (displayText === "") {
+          setIsDeleting(false);
+          setCurrentTitleIndex((prev) => (prev + 1) % titles.length);
+        }
+      }
+    };
+
+    const typingTimeout = setTimeout(updateText, isDeleting ? 50 : 150);
+
+    return () => clearTimeout(typingTimeout);
+  }, [displayText, currentTitleIndex, isDeleting, titles]);
+
+  return (
+    <span className="inline-block min-h-8">
+      {displayText}
+      <span className="animate-pulse">|</span>
+    </span>
+  );
+};
 
 const HeroSection = () => {
-  useEffect(() => {
-    AOS.init({
-      duration: 1000,
-      once: true,
-    });
-  }, []);
-
-  // Framer Motion animation variants
-  const textAnimation = {
-    hidden: { opacity: 0, y: 50 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.8 } },
+  // Animation variants
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.2,
+        delayChildren: 0.3,
+      },
+    },
   };
 
-  const imageAnimation = {
-    hidden: { opacity: 0, scale: 0.8 },
-    visible: { opacity: 1, scale: 1, transition: { duration: 0.8 } },
+  const itemVariants = {
+    hidden: { y: 20, opacity: 0 },
+    visible: {
+      y: 0,
+      opacity: 1,
+      transition: { duration: 0.5 },
+    },
+  };
+
+  const imageVariants = {
+    hidden: { scale: 0.8, opacity: 0 },
+    visible: {
+      scale: 1,
+      opacity: 1,
+      transition: {
+        type: "spring",
+        stiffness: 100,
+        duration: 0.8,
+      },
+    },
   };
 
   return (
-    <div className="flex items-center justify-center md:justify-between flex-col-reverse md:flex-row pt-8 md:pt-16 md:px-8 px-4 bg-dark text-white">
-      {/* Left side content */}
-      <motion.div
-        className="w-full md:w-1/2 text-center md:text-left mt-10 md:mt-0"
-        initial="hidden"
-        animate="visible"
-        variants={textAnimation}
-        data-aos="fade-up"
-      >
-        <h1 className="text-3xl md:text-5xl font-semibold mb-4">
-          Hi, I&apos;m <span className="text-green-400"></span>
-        </h1>
-        <h1 className="text-lg md:text-4xl font-medium text-green-400 mb-4">
-          <TypeText />
-        </h1>
-        <p data-aos="fade-right" className="mb-6 text-lg text-gray-300">
-          I&apos;m a full-stack developer, crafting seamless web applications
-          with precision and creativity. Each line of code is a step toward
-          innovation, and challenges inspire me to refine my skills. I&apos;m
-          seeking opportunities that will shape my journey into a masterpiece of
-          development expertise.
-        </p>
-        <Link
-          href="https://docs.google.com/document/d/13F7QbWT-BGJlKwMMnIY_Byj97lL9Mq-jfOqvnLmTIkI/edit?usp=sharing"
-          className="flex justify-center md:justify-start"
-          target="_blank"
-        >
-          <button
-            data-aos="flip-left"
-            className="group px-3 py-2 text-xl flex items-center justify-center gap-2 border-2 border-green-500 rounded-sm  text-slate-200 font-medium  hover:from-green-600 hover:via-green-700 hover:to-green-800 hover:shadow-lg hover:shadow-green-500/50 transition-all duration-300 ease-in-out"
-          >
-            <FaDownload className="text-white group-hover:scale-125 group-hover:rotate-12 transition-transform duration-300" />
-            <span className="group-hover:text-white">Download CV</span>
-          </button>
-        </Link>
+    <section className="relative bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 text-white overflow-hidden">
+      {/* Background elements */}
+      <div className="absolute inset-0 opacity-5">
+        <div className="absolute top-20 left-10 w-40 h-40 rounded-full bg-green-400 blur-3xl"></div>
+        <div className="absolute bottom-20 right-10 w-60 h-60 rounded-full bg-blue-500 blur-3xl"></div>
+      </div>
 
-        <div
-          className="flex justify-center md:justify-start space-x-3 mt-8"
-          data-aos="fade-up"
-        >
-          <a
-            href="https://github.com/sumon-devCoder"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center justify-center w-12 h-12 border-2 border-green-400 rounded-full hover:bg-green-400 hover:text-white transition duration-300"
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24">
+        <div className="flex flex-col-reverse md:flex-row items-center justify-between gap-8 md:gap-12">
+          {/* Left content area */}
+          <motion.div
+            className="w-full md:w-3/5 mt-10 md:mt-0"
+            initial="hidden"
+            animate="visible"
+            variants={containerVariants}
           >
-            <FaGithub className="text-2xl" />
-          </a>
-          <a
-            href="https://www.linkedin.com/in/sumon-devcoder"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center justify-center w-12 h-12 border-2 border-green-400 rounded-full hover:bg-green-400 hover:text-white transition duration-300"
-          >
-            <FaLinkedin className="text-2xl" />
-          </a>
-          <a
-            href="https://facebook.com/sumon.devCoder"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center justify-center w-12 h-12 border-2 border-green-400 rounded-full hover:bg-green-400 hover:text-white transition duration-300"
-          >
-            <FaFacebook className="text-2xl" />
-          </a>
-        </div>
-      </motion.div>
+            <motion.span
+              variants={itemVariants}
+              className="inline-block text px-4 py-1 bg-green-400/10 text-green-400 rounded-full text-sm font-medium mb-4"
+            >
+              Welcome to my portfolio
+            </motion.span>
 
-      {/* Right side image */}
-      <motion.div
-        className="w-full md:w-1/2 flex justify-center p-2"
-        initial="hidden"
-        animate="visible"
-        variants={imageAnimation}
-        data-aos="zoom-in"
-      >
-        <div
-          className={`${styles["animated-border"]} p-4 rounded-lg hover:scale-110 transition `}
-        >
-          <Image
-            src={developerImg}
-            width={400}
-            height={600}
-            alt="Sumon Developer"
-            className="object-cover -mt-10 p-2"
-          />
+            <motion.h1
+              variants={itemVariants}
+              className="text-4xl md:text-5xl lg:text-6xl font-bold mb-2 bg-clip-text text-transparent bg-gradient-to-r from-white to-gray-300"
+            >
+              Hi, I'm <span className="text-green-400">Sumon</span>
+            </motion.h1>
+
+            <motion.div
+              variants={itemVariants}
+              className="text-xl md:text-2xl lg:text-3xl font-medium text-green-400 mb-6"
+            >
+              <TypeWriter />
+            </motion.div>
+
+            <motion.p
+              variants={itemVariants}
+              className="text-lg text-gray-300 leading-relaxed mb-8 max-w-2xl"
+            >
+              I'm a full-stack developer & create websites that help businesses
+              grow by turning visitors into loyal customers — ideal for anyone
+              looking to expand their online presence.
+            </motion.p>
+
+            <motion.div
+              variants={itemVariants}
+              className="flex flex-wrap gap-4 mb-10"
+            >
+              <Link
+                href="https://docs.google.com/document/d/13F7QbWT-BGJlKwMMnIY_Byj97lL9Mq-jfOqvnLmTIkI/edit?usp=sharing"
+                target="_blank"
+              >
+                <button className="group relative px-6 py-3 bg-gradient-to-r from-green-500 to-emerald-600 hover:from-emerald-600 hover:to-green-700 text-white font-medium rounded-lg flex items-center gap-2 shadow-lg shadow-green-500/20 hover:shadow-green-500/40 transition-all duration-300 overflow-hidden">
+                  <span className="absolute inset-0 bg-green-700 opacity-0 group-active:opacity-20 transition-all duration-300 rounded-lg"></span>
+                  <FaDownload className="group-hover:scale-110 group-hover:rotate-12 transition-transform duration-300" />
+                  <span className="relative">Download Resume</span>
+                </button>
+              </Link>
+
+              <button className="relative px-[53px] py-2 border-2 border-gray-700 text-gray-300 font-medium rounded-lg overflow-hidden group hover:text-white transition-all duration-300 hover:border-none hover:shadow-[0_0_15px_2px_rgba(34,197,94,0.5)] active:scale-95">
+                <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-green-500 to-green-700 opacity-0 group-hover:opacity-100 transition-all duration-500 ease-out"></span>
+                <span className="relative z-10">View Projects</span>
+              </button>
+            </motion.div>
+
+            <motion.div variants={itemVariants} className="flex gap-4">
+              <a
+                href="https://github.com/sumon-devCoder"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center justify-center w-12 h-12 rounded-full bg-gray-800 hover:bg-green-500 text-gray-300 hover:text-white border border-gray-700 transition-all duration-300 shadow-lg"
+                aria-label="GitHub"
+              >
+                <FaGithub className="text-xl" />
+              </a>
+              <a
+                href="https://www.linkedin.com/in/sumon-devcoder"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center justify-center w-12 h-12 rounded-full bg-gray-800 hover:bg-green-500 text-gray-300 hover:text-white border border-gray-700 transition-all duration-300 shadow-lg"
+                aria-label="LinkedIn"
+              >
+                <FaLinkedin className="text-xl" />
+              </a>
+              <a
+                href="https://facebook.com/sumon.devCoder"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center justify-center w-12 h-12 rounded-full bg-gray-800 hover:bg-green-500 text-gray-300 hover:text-white border border-gray-700 transition-all duration-300 shadow-lg"
+                aria-label="Facebook"
+              >
+                <FaFacebook className="text-xl" />
+              </a>
+            </motion.div>
+          </motion.div>
+
+          {/* Right image area */}
+          <motion.div
+            className="w-full md:w-2/5 flex justify-center mt-5 md:mt-0"
+            variants={imageVariants}
+            initial="hidden"
+            animate="visible"
+          >
+            <div className="relative">
+              {/* Animated border effect */}
+              <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-green-400 via-blue-500 to-purple-600 blur-md opacity-70 animate-pulse"></div>
+
+              {/* Image container */}
+              <div className="relative bg-gray-900 p-2 rounded-2xl overflow-hidden">
+                {/* Replace with your image */}
+                <div className="aspect-square w-full max-w-md overflow-hidden rounded-xl">
+                  <Image
+                    src="/assets/sumon.jpeg"
+                    width={400}
+                    height={400}
+                    alt="Sumon Developer"
+                    className="object-cover  w-full h-full hover:scale-105 transition-transform duration-500"
+                  />
+                </div>
+              </div>
+            </div>
+          </motion.div>
         </div>
-      </motion.div>
-    </div>
+      </div>
+    </section>
   );
 };
 
