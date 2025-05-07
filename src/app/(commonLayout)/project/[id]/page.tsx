@@ -44,7 +44,7 @@ const ProjectDetailsCard = () => {
   }
 
   // Function to truncate text
-  const truncateText = (text, maxLength) => {
+  const truncateText = (text: string, maxLength: number) => {
     if (!text) return "";
     if (text.length <= maxLength) return text;
     return text.substr(0, maxLength) + "...";
@@ -134,14 +134,16 @@ const ProjectDetailsCard = () => {
                     <Cpu size={20} className="text-green-500" /> Tech Stack
                   </h3>
                   <div className="flex flex-wrap gap-2">
-                    {technologies?.map((tech, index) => (
-                      <span
-                        key={index}
-                        className="px-3 py-1 bg-gray-800 text-gray-200 border border-gray-700 rounded-full text-sm font-medium"
-                      >
-                        {tech.trim()}
-                      </span>
-                    ))}
+                    {technologies?.map(
+                      (tech: string, index: React.Key | null | undefined) => (
+                        <span
+                          key={index}
+                          className="px-3 py-1 bg-gray-800 text-gray-200 border border-gray-700 rounded-full text-sm font-medium"
+                        >
+                          {tech.trim()}
+                        </span>
+                      )
+                    )}
                   </div>
                 </div>
 
