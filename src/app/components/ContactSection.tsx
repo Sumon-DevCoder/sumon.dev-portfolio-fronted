@@ -1,105 +1,269 @@
-import { FaFacebook, FaGithub, FaLinkedin } from "react-icons/fa";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable react/no-unescaped-entities */
+import { useState } from "react";
+import { motion } from "framer-motion";
+import {
+  FaFacebook,
+  FaGithub,
+  FaLinkedin,
+  FaWhatsapp,
+  FaInstagram,
+  FaEnvelope,
+  FaPaperPlane,
+} from "react-icons/fa";
 
 const ContactSection = () => {
-  return (
-    <div className="my-6 px-4" id="contact">
-      <div className="grid sm:grid-cols-2 grid-cols-1 items-center gap-8 sm:gap-16 p-6 sm:p-10 mx-auto bg-black shadow-[0_2px_10px_-3px_rgba(6,81,237,0.3)] rounded-md text-[#333] font-[sans-serif]">
-        {/* Left Section */}
-        <div>
-          <h1 className="text-3xl sm:text-4xl text-green-600 font-extrabold">
-            Let&apos;s Collaborate
-          </h1>
-          <p className="text-base sm:text-xl text-gray-400 mt-3">
-            Have an exciting project or idea you&apos;d like to bring to life?
-            Let&apos;s work together to create something amazing! I&apos;m
-            always open to new opportunities and collaborations.
-          </p>
-          <div className="mt-8">
-            <h2 className="text-lg font-extrabold text-green-600">Email</h2>
-            <ul className="mt-3">
-              <li className="flex items-center">
-                <div className="bg-black h-8 w-8 sm:h-10 sm:w-10 rounded-full flex items-center justify-center shrink-0">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="18px"
-                    height="18px"
-                    fill="#007bff"
-                    viewBox="0 0 479.058 479.058"
-                  >
-                    <path d="M434.146 59.882H44.912C20.146 59.882 0 80.028 0 104.794v269.47c0 24.766 20.146 44.912 44.912 44.912h389.234c24.766 0 44.912-20.146 44.912-44.912v-269.47c0-24.766-20.146-44.912-44.912-44.912zm0 29.941c2.034 0 3.969.422 5.738 1.159L239.529 264.631 39.173 90.982a14.902 14.902 0 0 1 5.738-1.159zm0 299.411H44.912c-8.26 0-14.971-6.71-14.971-14.971V122.615l199.778 173.141c2.822 2.441 6.316 3.655 9.81 3.655s6.988-1.213 9.81-3.655l199.778-173.141v251.649c-.001 8.26-6.711 14.97-14.971 14.97z" />
-                  </svg>
-                </div>
-                <a className="text-[#007bff] text-sm ml-3">
-                  <small className="block">Mail</small>
-                  <strong>Sumon.DevCoder@gmail.com</strong>
-                </a>
-              </li>
-            </ul>
-          </div>
-          <div className="mt-8">
-            <h2 className="text-lg text-green-600 font-extrabold">Socials</h2>
-            <div
-              className="flex justify-center sm:justify-start space-x-3 mt-6 text-slate-300"
-              data-aos="fade-up"
-            >
-              <a
-                href="https://github.com/sumon-devCoder"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 border-2 border-green-400 rounded-full hover:bg-green-400 hover:text-white transition duration-300"
-              >
-                <FaGithub className="text-lg sm:text-xl" />
-              </a>
-              <a
-                href="https://www.linkedin.com/in/mustafizur-rahman-sumon-790199290/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 border-2 border-green-400 rounded-full hover:bg-green-400 hover:text-white transition duration-300"
-              >
-                <FaLinkedin className="text-lg sm:text-xl" />
-              </a>
-              <a
-                href="https://www.facebook.com/Sumon.DevCoder/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 border-2 border-green-400 rounded-full hover:bg-green-400 hover:text-white transition duration-300"
-              >
-                <FaFacebook className="text-lg sm:text-xl" />
-              </a>
-            </div>
-          </div>
-        </div>
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    subject: "",
+    message: "",
+  });
 
-        {/* Right Section (Form) */}
-        <form className="space-y-4">
-          <input
-            type="text"
-            placeholder="Name"
-            className="w-full rounded-md py-3 sm:py-4 px-4 border text-white text-sm sm:text-md outline-[#007bff]"
-          />
-          <input
-            type="email"
-            placeholder="Email"
-            className="w-full rounded-md py-3 sm:py-4 px-4 border text-white text-sm sm:text-md outline-[#007bff]"
-          />
-          <input
-            type="text"
-            placeholder="Subject"
-            className="w-full rounded-md py-3 sm:py-4 px-4 border text-white text-sm sm:text-md outline-[#007bff]"
-          />
-          <textarea
-            placeholder="Message"
-            className="w-full h-32 sm:h-40 rounded-md px-4 border text-white text-sm sm:text-md pt-3 sm:pt-4 outline-[#007bff]"
-          ></textarea>
-          <button
-            type="button"
-            className="bg-[#007bff] hover:bg-blue-600 text-white font-semibold rounded-md text-md px-4 py-3 sm:py-4 w-full"
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1,
+        delayChildren: 0.2,
+      },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { y: 20, opacity: 0 },
+    visible: {
+      y: 0,
+      opacity: 1,
+      transition: { duration: 0.5 },
+    },
+  };
+
+  const handleChange = (e: { target: { name: any; value: any } }) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleSubmit = (e: { preventDefault: () => void }) => {
+    e.preventDefault();
+    // Add your form submission logic here
+    console.log("Form submitted:", formData);
+    // Reset form after submission
+    setFormData({ name: "", email: "", subject: "", message: "" });
+  };
+
+  return (
+    <section className="py-16 px-4 bg-gray-900" id="contact">
+      <motion.div
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.3 }}
+        variants={containerVariants}
+        className="max-w-6xl mx-auto"
+      >
+        <motion.div variants={itemVariants} className="text-center mb-12">
+          <h2 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-green-400 to-blue-500 bg-clip-text text-transparent">
+            Let's Connect
+          </h2>
+          <div className="w-20 h-1 bg-gradient-to-r from-green-400 to-blue-500 mx-auto mt-2 mb-4"></div>
+          <p className="text-gray-300 text-lg max-w-2xl mx-auto">
+            Have an exciting project or idea you'd like to bring to life? Let's
+            work together to create something amazing!
+          </p>
+        </motion.div>
+
+        <div className="grid lg:grid-cols-5 gap-8">
+          {/* Left Section - Contact Info */}
+          <motion.div
+            variants={containerVariants}
+            className="lg:col-span-2 space-y-8 order-2 lg:order-1"
           >
-            Send
-          </button>
-        </form>
-      </div>
-    </div>
+            <motion.div
+              variants={itemVariants}
+              className="bg-gray-800 p-6 rounded-xl border border-gray-700 shadow-xl hover:shadow-green-500/10 transition-all duration-300"
+            >
+              <h3 className="text-2xl font-bold mb-4 text-white">
+                Get in Touch
+              </h3>
+              <p className="text-gray-300 mb-6">
+                I'm always open to new opportunities and collaborations. Feel
+                free to reach out through any of these channels.
+              </p>
+
+              <div className="space-y-6">
+                <motion.div
+                  variants={itemVariants}
+                  className="flex items-center gap-4"
+                >
+                  <div className="flex items-center justify-center w-12 h-12 rounded-full bg-gradient-to-br from-green-400 to-blue-500 text-white">
+                    <FaEnvelope className="text-lg" />
+                  </div>
+                  <div>
+                    <p className="text-gray-400 text-sm">Email</p>
+                    <a
+                      href="mailto:Sumon.DevCoder@gmail.com"
+                      className="text-white font-medium hover:text-green-400 transition-colors"
+                    >
+                      Sumon.DevCoder@gmail.com
+                    </a>
+                  </div>
+                </motion.div>
+              </div>
+            </motion.div>
+
+            <motion.div
+              variants={itemVariants}
+              className="bg-gray-800 p-6 rounded-xl border border-gray-700 shadow-xl hover:shadow-blue-500/10 transition-all duration-300"
+            >
+              <h3 className="text-2xl font-bold mb-4 text-white">
+                Connect With Me
+              </h3>
+              <p className="text-gray-300 mb-6">
+                Follow me on social media to stay updated with my latest
+                projects and thoughts.
+              </p>
+
+              <motion.div
+                variants={itemVariants}
+                className="flex flex-wrap gap-4"
+              >
+                <a
+                  href="https://github.com/sumon-devCoder"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center justify-center w-12 h-12 rounded-full bg-gradient-to-br from-gray-700 to-gray-800 hover:from-green-400 hover:to-emerald-600 text-gray-300 hover:text-white border border-gray-600 hover:border-green-400/50 transition-all duration-300 shadow-lg hover:shadow-green-500/30 transform hover:-translate-y-1"
+                  aria-label="GitHub"
+                >
+                  <FaGithub className="text-xl transition-transform duration-300 hover:scale-110" />
+                </a>
+
+                <a
+                  href="https://www.linkedin.com/in/sumon-devcoder"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center justify-center w-12 h-12 rounded-full bg-gradient-to-br from-blue-600 to-blue-700 hover:from-blue-500 hover:to-blue-600 text-gray-300 hover:text-white border border-blue-500 hover:border-blue-400/50 transition-all duration-300 shadow-lg hover:shadow-blue-500/30 transform hover:-translate-y-1"
+                  aria-label="LinkedIn"
+                >
+                  <FaLinkedin className="text-xl transition-transform duration-300 hover:scale-110" />
+                </a>
+
+                <a
+                  href="https://wa.me/+8801962878499"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center justify-center w-12 h-12 rounded-full bg-gradient-to-br from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-gray-300 hover:text-white border border-green-600 hover:border-green-500/50 transition-all duration-300 shadow-lg hover:shadow-green-500/30 transform hover:-translate-y-1"
+                  aria-label="WhatsApp"
+                >
+                  <FaWhatsapp className="text-xl transition-transform duration-300 hover:scale-110" />
+                </a>
+
+                <a
+                  href="https://facebook.com/sumon.devCoder"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center justify-center w-12 h-12 rounded-full bg-gradient-to-br from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-gray-300 hover:text-white border border-blue-600 hover:border-blue-500/50 transition-all duration-300 shadow-lg hover:shadow-blue-600/30 transform hover:-translate-y-1"
+                  aria-label="Facebook"
+                >
+                  <FaFacebook className="text-xl transition-transform duration-300 hover:scale-110" />
+                </a>
+
+                <a
+                  href="https://instagram.com/mustafizurrahman_sumon"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center justify-center w-12 h-12 rounded-full bg-gradient-to-br from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-gray-300 hover:text-white border border-pink-600 hover:border-pink-500/50 transition-all duration-300 shadow-lg hover:shadow-pink-500/30 transform hover:-translate-y-1"
+                  aria-label="Instagram"
+                >
+                  <FaInstagram className="text-xl transition-transform duration-300 hover:scale-110" />
+                </a>
+              </motion.div>
+            </motion.div>
+          </motion.div>
+
+          {/* Right Section - Contact Form */}
+          <motion.div
+            variants={containerVariants}
+            className="lg:col-span-3 order-1 lg:order-2"
+          >
+            <motion.div
+              variants={itemVariants}
+              className="bg-gray-800 p-8 rounded-xl border border-gray-700 shadow-xl"
+            >
+              <h3 className="text-2xl font-bold mb-6 text-white">
+                Send Me a Message
+              </h3>
+
+              <form onSubmit={handleSubmit} className="space-y-5">
+                <motion.div
+                  variants={itemVariants}
+                  className="grid grid-cols-1 md:grid-cols-2 gap-5"
+                >
+                  <div className="relative">
+                    <input
+                      type="text"
+                      name="name"
+                      value={formData.name}
+                      onChange={handleChange}
+                      placeholder="Your Name"
+                      className="w-full bg-gray-700 border border-gray-600 rounded-lg py-3 px-4 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all duration-300"
+                      required
+                    />
+                  </div>
+                  <div className="relative">
+                    <input
+                      type="email"
+                      name="email"
+                      value={formData.email}
+                      onChange={handleChange}
+                      placeholder="Your Email"
+                      className="w-full bg-gray-700 border border-gray-600 rounded-lg py-3 px-4 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all duration-300"
+                      required
+                    />
+                  </div>
+                </motion.div>
+
+                <motion.div variants={itemVariants}>
+                  <input
+                    type="text"
+                    name="subject"
+                    value={formData.subject}
+                    onChange={handleChange}
+                    placeholder="Subject"
+                    className="w-full bg-gray-700 border border-gray-600 rounded-lg py-3 px-4 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all duration-300"
+                    required
+                  />
+                </motion.div>
+
+                <motion.div variants={itemVariants}>
+                  <textarea
+                    name="message"
+                    value={formData.message}
+                    onChange={handleChange}
+                    placeholder="Your Message"
+                    rows="6"
+                    className="w-full bg-gray-700 border border-gray-600 rounded-lg py-3 px-4 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all duration-300 resize-none"
+                    required
+                  ></textarea>
+                </motion.div>
+
+                <motion.div variants={itemVariants}>
+                  <button
+                    type="submit"
+                    className="w-full bg-gradient-to-r from-green-400 to-blue-500 hover:from-green-500 hover:to-blue-600 text-white font-medium py-3 px-6 rounded-lg flex items-center justify-center gap-2 transform transition-all duration-300 hover:scale-[1.02] hover:shadow-lg hover:shadow-blue-500/20"
+                  >
+                    <span>Send Message</span>
+                    <FaPaperPlane className="text-sm" />
+                  </button>
+                </motion.div>
+              </form>
+            </motion.div>
+          </motion.div>
+        </div>
+      </motion.div>
+    </section>
   );
 };
 

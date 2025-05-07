@@ -3,7 +3,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 
-const Loader = () => {
+const DynamicLoading = () => {
   const containerVariants = {
     start: { transition: { staggerChildren: 0.2 } },
     end: { transition: { staggerChildren: 0.2 } },
@@ -50,7 +50,7 @@ const styles = {
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
-    height: "100vh",
+    height: "20vh",
     background: "", // Changed the background color to black
   },
   loaderWrapper: {
@@ -65,4 +65,4 @@ const styles = {
   },
 };
 
-export default Loader;
+export default DynamicLoading;

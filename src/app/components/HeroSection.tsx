@@ -1,6 +1,14 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react/no-unescaped-entities */
-import React, { useState, useEffect } from "react";
-import { FaDownload, FaGithub, FaLinkedin, FaFacebook } from "react-icons/fa";
+import React, { useState, useEffect, useRef } from "react";
+import {
+  FaDownload,
+  FaGithub,
+  FaLinkedin,
+  FaFacebook,
+  FaInstagram,
+  FaWhatsapp,
+} from "react-icons/fa";
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
@@ -50,6 +58,155 @@ const TypeWriter = () => {
   );
 };
 
+// New animated background components
+const MovingGrid = () => {
+  return (
+    <div className="absolute inset-0 overflow-hidden opacity-10">
+      <div
+        className="absolute w-full h-full"
+        style={{
+          backgroundImage:
+            "linear-gradient(to right, rgba(49, 151, 149, 0.1) 1px, transparent 1px), linear-gradient(to bottom, rgba(49, 151, 149, 0.1) 1px, transparent 1px)",
+          backgroundSize: "50px 50px",
+          animation: "moveGrid 15s linear infinite",
+        }}
+      />
+    </div>
+  );
+};
+
+const FloatingCubes = () => {
+  const cubesData = Array.from({ length: 8 }, (_, i) => ({
+    id: i,
+    size: Math.random() * 100 + 50,
+    x: Math.random() * 100,
+    y: Math.random() * 100,
+    duration: Math.random() * 20 + 20,
+    delay: Math.random() * 5,
+    opacity: Math.random() * 0.05 + 0.02,
+  }));
+
+  return (
+    <div className="absolute inset-0 overflow-hidden">
+      {cubesData.map((cube) => (
+        <div
+          key={cube.id}
+          className="absolute border border-green-400/20"
+          style={{
+            width: `${cube.size}px`,
+            height: `${cube.size}px`,
+            top: `${cube.y}%`,
+            left: `${cube.x}%`,
+            opacity: cube.opacity,
+            transform: "rotate(45deg)",
+            animation: `floatUpDown ${cube.duration}s ease-in-out ${
+              cube.delay
+            }s infinite alternate, 
+                        spinSlow ${cube.duration * 1.5}s linear ${
+              cube.delay
+            }s infinite`,
+          }}
+        />
+      ))}
+    </div>
+  );
+};
+
+const WavyLines = () => {
+  return (
+    <div className="absolute inset-0 overflow-hidden">
+      <svg
+        className="absolute w-full h-full opacity-10"
+        viewBox="0 0 100 100"
+        preserveAspectRatio="none"
+      >
+        <path
+          d="M0,50 Q25,30 50,50 T100,50"
+          stroke="rgba(74, 222, 128, 0.5)"
+          strokeWidth="0.3"
+          fill="none"
+          className="animate-wave1"
+        />
+        <path
+          d="M0,60 Q25,40 50,60 T100,60"
+          stroke="rgba(45, 212, 191, 0.5)"
+          strokeWidth="0.3"
+          fill="none"
+          className="animate-wave2"
+        />
+        <path
+          d="M0,40 Q25,60 50,40 T100,40"
+          stroke="rgba(59, 130, 246, 0.5)"
+          strokeWidth="0.3"
+          fill="none"
+          className="animate-wave3"
+        />
+      </svg>
+    </div>
+  );
+};
+
+const MatrixRain = () => {
+  const canvasRef = useRef(null);
+
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    const context = canvas.getContext("2d");
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    const characters =
+      "アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    const columns = Math.floor(canvas.width / 20);
+    const drops = Array(columns).fill(0);
+
+    context.fillStyle = "rgba(0, 0, 0, 0.05)";
+    context.fillRect(0, 0, canvas.width, canvas.height);
+
+    context.fillStyle = "#0f0";
+    context.font = "15px monospace";
+
+    const draw = () => {
+      context.fillStyle = "rgba(0, 0, 0, 0.05)";
+      context.fillRect(0, 0, canvas.width, canvas.height);
+
+      context.fillStyle = "rgba(34, 197, 94, 0.35)";
+      for (let i = 0; i < drops.length; i++) {
+        const text = characters[Math.floor(Math.random() * characters.length)];
+        context.fillText(text, i * 20, drops[i] * 20);
+
+        if (drops[i] * 20 > canvas.height && Math.random() > 0.975) {
+          drops[i] = 0;
+        }
+
+        drops[i]++;
+      }
+    };
+
+    const intervalId = setInterval(draw, 50);
+
+    const handleResize = () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      clearInterval(intervalId);
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
+  return (
+    <canvas
+      ref={canvasRef}
+      className="absolute inset-0 opacity-20"
+      style={{ pointerEvents: "none" }}
+    />
+  );
+};
+
 const HeroSection = () => {
   // Animation variants
   const containerVariants = {
@@ -87,13 +244,109 @@ const HeroSection = () => {
 
   return (
     <section className="relative bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 text-white overflow-hidden">
-      {/* Background elements */}
-      <div className="absolute inset-0 opacity-5">
-        <div className="absolute top-20 left-10 w-40 h-40 rounded-full bg-green-400 blur-3xl"></div>
-        <div className="absolute bottom-20 right-10 w-60 h-60 rounded-full bg-blue-500 blur-3xl"></div>
+      {/* New advanced background animations */}
+      <style jsx global>{`
+        @keyframes moveGrid {
+          0% {
+            transform: translate(0, 0);
+          }
+          100% {
+            transform: translate(-50px, -50px);
+          }
+        }
+        @keyframes floatUpDown {
+          0% {
+            transform: translate(0, 0) rotate(45deg);
+          }
+          100% {
+            transform: translate(0, -100px) rotate(45deg);
+          }
+        }
+        @keyframes spinSlow {
+          from {
+            transform: rotate(45deg);
+          }
+          to {
+            transform: rotate(405deg);
+          }
+        }
+        @keyframes wave1 {
+          0% {
+            d: "M0,50 Q25,30 50,50 T100,50";
+          }
+          50% {
+            d: "M0,50 Q25,70 50,50 T100,50";
+          }
+          100% {
+            d: "M0,50 Q25,30 50,50 T100,50";
+          }
+        }
+        @keyframes wave2 {
+          0% {
+            d: "M0,60 Q25,40 50,60 T100,60";
+          }
+          50% {
+            d: "M0,60 Q25,80 50,60 T100,60";
+          }
+          100% {
+            d: "M0,60 Q25,40 50,60 T100,60";
+          }
+        }
+        @keyframes wave3 {
+          0% {
+            d: "M0,40 Q25,60 50,40 T100,40";
+          }
+          50% {
+            d: "M0,40 Q25,20 50,40 T100,40";
+          }
+          100% {
+            d: "M0,40 Q25,60 50,40 T100,40";
+          }
+        }
+        .animate-wave1 {
+          animation: wave1 12s ease-in-out infinite;
+        }
+        .animate-wave2 {
+          animation: wave2 10s ease-in-out infinite;
+        }
+        .animate-wave3 {
+          animation: wave3 15s ease-in-out infinite;
+        }
+      `}</style>
+
+      {/* Apply the custom background animations */}
+      <MovingGrid />
+      <FloatingCubes />
+      <WavyLines />
+      <MatrixRain />
+
+      {/* Original background elements */}
+      <div className="absolute inset-0 opacity-10">
+        <div className="absolute top-20 left-10 w-40 h-40 rounded-full bg-green-400 blur-3xl animate-pulse"></div>
+        <div className="absolute bottom-20 right-10 w-60 h-60 rounded-full bg-blue-500 blur-3xl animate-pulse"></div>
+        <div className="absolute top-40 right-32 w-32 h-32 rounded-full bg-purple-500 blur-3xl animate-pulse"></div>
+        <div className="absolute bottom-40 left-20 w-48 h-48 rounded-full bg-teal-400 blur-3xl animate-pulse"></div>
+        <div className="absolute top-1/2 left-1/2 w-72 h-72 -translate-x-1/2 -translate-y-1/2 rounded-full bg-blue-400/30 blur-3xl"></div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24">
+      {/* Animated particles */}
+      <div className="absolute inset-0 overflow-hidden">
+        {Array.from({ length: 20 }).map((_, i) => (
+          <div
+            key={i}
+            className="absolute bg-white rounded-full opacity-20"
+            style={{
+              width: `${Math.random() * 5 + 1}px`,
+              height: `${Math.random() * 5 + 1}px`,
+              top: `${Math.random() * 100}%`,
+              left: `${Math.random() * 100}%`,
+              animation: `float ${Math.random() * 10 + 10}s linear infinite`,
+            }}
+          ></div>
+        ))}
+      </div>
+
+      <div className="mx-auto px-4 sm:px-6 lg:px-8 py-5 md:pt-24">
         <div className="flex flex-col-reverse md:flex-row items-center justify-between gap-8 md:gap-12">
           {/* Left content area */}
           <motion.div
@@ -158,28 +411,50 @@ const HeroSection = () => {
                 href="https://github.com/sumon-devCoder"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center justify-center w-12 h-12 rounded-full bg-gray-800 hover:bg-green-500 text-gray-300 hover:text-white border border-gray-700 transition-all duration-300 shadow-lg"
+                className="flex items-center justify-center w-12 h-12 rounded-full bg-gradient-to-br from-gray-700 to-gray-800 hover:from-green-400 hover:to-emerald-600 text-gray-300 hover:text-white border border-gray-600 hover:border-green-400/50 transition-all duration-300 shadow-lg hover:shadow-green-500/30 transform hover:-translate-y-1"
                 aria-label="GitHub"
               >
-                <FaGithub className="text-xl" />
+                <FaGithub className="text-xl transition-transform duration-300 hover:scale-110" />
               </a>
+
               <a
                 href="https://www.linkedin.com/in/sumon-devcoder"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center justify-center w-12 h-12 rounded-full bg-gray-800 hover:bg-green-500 text-gray-300 hover:text-white border border-gray-700 transition-all duration-300 shadow-lg"
+                className="flex items-center justify-center w-12 h-12 rounded-full bg-gradient-to-br from-blue-600 to-blue-700 hover:from-blue-500 hover:to-blue-600 text-gray-300 hover:text-white border border-blue-500 hover:border-blue-400/50 transition-all duration-300 shadow-lg hover:shadow-blue-500/30 transform hover:-translate-y-1"
                 aria-label="LinkedIn"
               >
-                <FaLinkedin className="text-xl" />
+                <FaLinkedin className="text-xl transition-transform duration-300 hover:scale-110" />
               </a>
+
+              <a
+                href="https://wa.me/+8801962878499"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center justify-center w-12 h-12 rounded-full bg-gradient-to-br from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-gray-300 hover:text-white border border-green-600 hover:border-green-500/50 transition-all duration-300 shadow-lg hover:shadow-green-500/30 transform hover:-translate-y-1"
+                aria-label="WhatsApp"
+              >
+                <FaWhatsapp className="text-xl transition-transform duration-300 hover:scale-110" />
+              </a>
+
               <a
                 href="https://facebook.com/sumon.devCoder"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center justify-center w-12 h-12 rounded-full bg-gray-800 hover:bg-green-500 text-gray-300 hover:text-white border border-gray-700 transition-all duration-300 shadow-lg"
+                className="flex items-center justify-center w-12 h-12 rounded-full bg-gradient-to-br from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-gray-300 hover:text-white border border-blue-600 hover:border-blue-500/50 transition-all duration-300 shadow-lg hover:shadow-blue-600/30 transform hover:-translate-y-1"
                 aria-label="Facebook"
               >
-                <FaFacebook className="text-xl" />
+                <FaFacebook className="text-xl transition-transform duration-300 hover:scale-110" />
+              </a>
+
+              <a
+                href="https://instagram.com/mustafizurrahman_sumon"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center justify-center w-12 h-12 rounded-full bg-gradient-to-br from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-gray-300 hover:text-white border border-pink-600 hover:border-pink-500/50 transition-all duration-300 shadow-lg hover:shadow-pink-500/30 transform hover:-translate-y-1"
+                aria-label="Instagram"
+              >
+                <FaInstagram className="text-xl transition-transform duration-300 hover:scale-110" />
               </a>
             </motion.div>
           </motion.div>
@@ -193,7 +468,7 @@ const HeroSection = () => {
           >
             <div className="relative">
               {/* Animated border effect */}
-              <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-green-400 via-blue-500 to-purple-600 blur-md opacity-70 animate-pulse"></div>
+              <div className="absolute  inset-0 rounded-2xl bg-gradient-to-r from-green-400 via-blue-500 to-purple-600 blur-md opacity-70 animate-pulse"></div>
 
               {/* Image container */}
               <div className="relative bg-gray-900 p-2 rounded-2xl overflow-hidden">
@@ -204,7 +479,7 @@ const HeroSection = () => {
                     width={400}
                     height={400}
                     alt="Sumon Developer"
-                    className="object-cover  w-full h-full hover:scale-105 transition-transform duration-500"
+                    className="object-cover w-full h-full hover:scale-105 transition-transform duration-500"
                   />
                 </div>
               </div>

@@ -1,12 +1,25 @@
 "use client";
+import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { useGetSingleprojectQuery } from "@/redux/features/project/projectApi";
 import { useParams } from "next/navigation";
-import React from "react";
+import {
+  ExternalLink,
+  Github,
+  Monitor,
+  Code,
+  Calendar,
+  Cpu,
+  Layout,
+  Briefcase,
+  ChevronDown,
+  ChevronUp,
+} from "lucide-react";
 
 const ProjectDetailsCard = () => {
   const { id } = useParams();
-  const { data } = useGetSingleprojectQuery(id);
+  const { data, isLoading } = useGetSingleprojectQuery(id);
+  const [showFullDescription, setShowFullDescription] = useState(false);
 
   const {
     title,
@@ -20,119 +33,230 @@ const ProjectDetailsCard = () => {
     type,
     challenges,
     features,
+    image,
   } = data?.data || {};
 
+  if (isLoading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-black">
+        <div className="w-16 h-16 border-4 border-green-500 border-t-transparent rounded-full animate-spin"></div>
+      </div>
+    );
+  }
+
+  // Function to truncate text
+  const truncateText = (text, maxLength) => {
+    if (!text) return "";
+    if (text.length <= maxLength) return text;
+    return text.substr(0, maxLength) + "...";
+  };
+
   return (
-    <div className="py-10">
-      <div className="flex  flex-col border-2 rounded-lg shadow-lg overflow-hidden my-5  max-w-screen-xl m-auto">
-        {/* Top Section: Live Preview in iframe */}
-        <div className="max-w-full md:h-[500px] overflow-hidden relative">
-          <a href={liveLink} target="_blank" rel="noopener noreferrer">
-            <motion.div
-              whileHover={{ scale: 1.02 }}
-              className="h-full w-full overflow-hidden"
+    <div className="py-10 px-4 bg-black min-h-screen">
+      <div className="max-w-screen-xl mx-auto">
+        {/* Hero Section with Live Preview */}
+        <div className="mb-8 rounded-xl overflow-hidden shadow-2xl bg-gray-900 border border-gray-800">
+          <div className="relative">
+            {/* Preview Image or Iframe */}
+            <div className="w-full h-64 md:h-96 lg:h-[500px] overflow-hidden bg-gray-800">
+              {liveLink ? (
+                <iframe
+                  src={liveLink}
+                  className="w-full h-full border-none"
+                  title={title}
+                  sandbox="allow-same-origin allow-scripts allow-popups allow-forms"
+                ></iframe>
+              ) : (
+                <div className="w-full h-full flex items-center justify-center bg-gray-800">
+                  <Layout size={64} className="text-gray-600" />
+                </div>
+              )}
+            </div>
+
+            {/* Live Site Button */}
+            <a
+              href={liveLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="absolute top-4 right-4"
             >
-              <iframe
-                src={liveLink}
-                className="h-full w-full border-none"
-                title={title}
-                sandbox="allow-same-origin allow-scripts allow-popups allow-forms"
-              ></iframe>
-            </motion.div>
-          </a>
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="flex items-center gap-2 bg-green-500 hover:bg-green-600 text-black font-medium px-4 py-2 rounded-lg shadow-lg"
+              >
+                <Monitor size={18} />
+                <span>View Live</span>
+              </motion.button>
+            </a>
+          </div>
+
+          {/* Project Info */}
+          <div className="p-6 md:p-8">
+            <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-6">
+              {/* Left Column - Main Info */}
+              <div className="flex-1">
+                <h1 className="text-3xl md:text-4xl font-bold text-white mb-2">
+                  {title}
+                </h1>
+
+                {/* Description with Read More toggle */}
+                <div className="mt-4">
+                  <div className="text-gray-300 text-lg">
+                    {showFullDescription
+                      ? description
+                      : truncateText(description, 300)}
+                  </div>
+                  {description && description.length > 300 && (
+                    <button
+                      onClick={() =>
+                        setShowFullDescription(!showFullDescription)
+                      }
+                      className="mt-2 text-green-500 hover:text-green-400 flex items-center gap-1 font-medium"
+                    >
+                      {showFullDescription ? (
+                        <>
+                          <span>Read Less</span>
+                          <ChevronUp size={18} />
+                        </>
+                      ) : (
+                        <>
+                          <span>Read More</span>
+                          <ChevronDown size={18} />
+                        </>
+                      )}
+                    </button>
+                  )}
+                </div>
+
+                {/* Tech Stack */}
+                <div className="mt-6">
+                  <h3 className="text-xl font-semibold mb-3 text-white flex items-center gap-2">
+                    <Cpu size={20} className="text-green-500" /> Tech Stack
+                  </h3>
+                  <div className="flex flex-wrap gap-2">
+                    {technologies?.map((tech, index) => (
+                      <span
+                        key={index}
+                        className="px-3 py-1 bg-gray-800 text-gray-200 border border-gray-700 rounded-full text-sm font-medium"
+                      >
+                        {tech.trim()}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Key Features */}
+                <div className="mt-6">
+                  <h3 className="text-xl font-semibold mb-3 text-white flex items-center gap-2">
+                    <Layout size={20} className="text-green-500" /> Key Features
+                  </h3>
+                  <div className="text-gray-300">{features}</div>
+                </div>
+              </div>
+
+              {/* Right Column - Project Details */}
+              <div className="md:w-64 lg:w-80 space-y-6 p-6 bg-gray-800 rounded-xl border border-gray-700">
+                <div>
+                  <h3 className="text-xl font-semibold mb-3 text-white">
+                    Project Details
+                  </h3>
+                  <div className="space-y-4">
+                    <div className="flex items-center gap-2">
+                      <Calendar size={18} className="text-green-500" />
+                      <div>
+                        <span className="block text-sm text-gray-400">
+                          Completed
+                        </span>
+                        <span className="font-medium text-white">{date}</span>
+                      </div>
+                    </div>
+
+                    <div className="flex items-center gap-2">
+                      <Briefcase size={18} className="text-green-500" />
+                      <div>
+                        <span className="block text-sm text-gray-400">
+                          Category
+                        </span>
+                        <span className="font-medium text-white">
+                          {category}
+                        </span>
+                      </div>
+                    </div>
+
+                    <div className="flex items-center gap-2">
+                      <Code size={18} className="text-green-500" />
+                      <div>
+                        <span className="block text-sm text-gray-400">
+                          Type
+                        </span>
+                        <span className="font-medium text-white">{type}</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Action Buttons */}
+                <div className="space-y-3">
+                  <a
+                    href={clientCode}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="block"
+                  >
+                    <motion.button
+                      whileHover={{ scale: 1.02 }}
+                      whileTap={{ scale: 0.98 }}
+                      className="w-full flex items-center justify-center gap-2 bg-gray-700 hover:bg-gray-600 text-white py-3 px-4 rounded-lg border border-gray-600"
+                    >
+                      <Github size={18} />
+                      <span>Client Repository</span>
+                    </motion.button>
+                  </a>
+
+                  <a
+                    href={serverCode}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="block"
+                  >
+                    <motion.button
+                      whileHover={{ scale: 1.02 }}
+                      whileTap={{ scale: 0.98 }}
+                      className="w-full flex items-center justify-center gap-2 bg-gray-700 hover:bg-gray-600 text-white py-3 px-4 rounded-lg border border-gray-600"
+                    >
+                      <Github size={18} />
+                      <span>Server Repository</span>
+                    </motion.button>
+                  </a>
+
+                  <a
+                    href={liveLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="block"
+                  >
+                    <motion.button
+                      whileHover={{ scale: 1.02 }}
+                      whileTap={{ scale: 0.98 }}
+                      className="w-full flex items-center justify-center gap-2 bg-green-500 hover:bg-green-600 text-black font-medium py-3 px-4 rounded-lg"
+                    >
+                      <ExternalLink size={18} />
+                      <span>Visit Website</span>
+                    </motion.button>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
 
-        {/* Bottom Section: Content */}
-        <div className="p-6 flex flex-col justify-between bg-gray-900 text-white">
-          <div className="mb-6">
-            <h3 className="text-4xl font-bold text-green-600 mb-3">{title}</h3>
-            <p className="text-xl text-gray-300 mb-4">{description}</p>
-
-            <div className="space-y-4">
-              <div className="flex items-center space-x-2">
-                <span className="font-semibold text-lg">Date:</span>
-                <span>{date}</span>
-              </div>
-              <div className="flex items-center space-x-2">
-                <span className="font-semibold text-lg">Category:</span>
-                <span>{category}</span>
-              </div>
-              <div className="flex items-center space-x-2">
-                <span className="font-semibold text-lg">Type:</span>
-                <span>{type}</span>
-              </div>
-            </div>
-          </div>
-
-          {/* Technologies and Features */}
-          <div className="space-y-6">
-            <div>
-              <h4 className="text-2xl font-semibold text-green-400 mb-2">
-                Technologies Used:
-              </h4>
-              <div className="flex flex-wrap gap-4">
-                {technologies?.map(
-                  (
-                    tech: string | undefined,
-                    index: React.Key | null | undefined
-                  ) => (
-                    <div
-                      key={index}
-                      className="px-4 py-2 bg-gray-800 text-white rounded-full text-lg font-medium hover:bg-green-600 transition duration-300"
-                      title={tech}
-                    >
-                      {tech!.trim()}
-                    </div>
-                  )
-                )}
-              </div>
-            </div>
-
-            <div>
-              <h4 className="text-2xl font-semibold text-green-400 mb-2">
-                Challenges Faced:
-              </h4>
-              <p className="text-lg text-gray-300">{challenges}</p>
-            </div>
-
-            <div>
-              <h4 className="text-2xl font-semibold text-green-400 mb-2">
-                Key Features:
-              </h4>
-              <p className="text-lg text-gray-300">{features}</p>
-            </div>
-          </div>
-
-          {/* Action Buttons */}
-          <div className="flex flex-wrap gap-4 mt-6">
-            <a href={clientCode} target="_blank" rel="noopener noreferrer">
-              <motion.button
-                className="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                Client Code
-              </motion.button>
-            </a>
-            <a href={serverCode} target="_blank" rel="noopener noreferrer">
-              <motion.button
-                className="px-6 py-3 bg-purple-600 hover:bg-purple-700 text-white rounded-lg"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                Server Code
-              </motion.button>
-            </a>
-            <a href={liveLink} target="_blank" rel="noopener noreferrer">
-              <motion.button
-                className="px-6 py-3 bg-green-600 hover:bg-green-700 text-white rounded-lg"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                Live Link
-              </motion.button>
-            </a>
-          </div>
+        {/* Project Challenges Section */}
+        <div className="rounded-xl overflow-hidden shadow-lg bg-gray-900 p-6 md:p-8 border border-gray-800">
+          <h2 className="text-2xl font-bold text-white mb-4">
+            Development Challenges
+          </h2>
+          <div className="text-gray-300 leading-relaxed">{challenges}</div>
         </div>
       </div>
     </div>
