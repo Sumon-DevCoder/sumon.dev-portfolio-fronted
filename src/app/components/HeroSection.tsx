@@ -147,30 +147,35 @@ const WavyLines = () => {
 };
 
 const MatrixRain = () => {
-  const canvasRef = useRef(null);
+  const canvasRef = useRef<HTMLCanvasElement | null>(null);
 
   useEffect(() => {
     const canvas = canvasRef.current;
+    if (!canvas) return;
+
     const context = canvas.getContext("2d");
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
+    if (!context) return;
+
+    // Set canvas dimensions
+    const resizeCanvas = () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    };
+    resizeCanvas();
 
     const characters =
       "アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     const columns = Math.floor(canvas.width / 20);
     const drops = Array(columns).fill(0);
 
-    context.fillStyle = "rgba(0, 0, 0, 0.05)";
-    context.fillRect(0, 0, canvas.width, canvas.height);
-
-    context.fillStyle = "#0f0";
-    context.font = "15px monospace";
-
+    // Draw matrix effect
     const draw = () => {
       context.fillStyle = "rgba(0, 0, 0, 0.05)";
       context.fillRect(0, 0, canvas.width, canvas.height);
 
       context.fillStyle = "rgba(34, 197, 94, 0.35)";
+      context.font = "15px monospace";
+
       for (let i = 0; i < drops.length; i++) {
         const text = characters[Math.floor(Math.random() * characters.length)];
         context.fillText(text, i * 20, drops[i] * 20);
@@ -178,23 +183,22 @@ const MatrixRain = () => {
         if (drops[i] * 20 > canvas.height && Math.random() > 0.975) {
           drops[i] = 0;
         }
-
         drops[i]++;
       }
+
+      // Request the next frame
+      requestAnimationFrame(draw);
     };
 
-    const intervalId = setInterval(draw, 50);
+    // Start the animation
+    requestAnimationFrame(draw);
 
-    const handleResize = () => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-    };
+    // Resize listener
+    window.addEventListener("resize", resizeCanvas);
 
-    window.addEventListener("resize", handleResize);
-
+    // Cleanup on component unmount
     return () => {
-      clearInterval(intervalId);
-      window.removeEventListener("resize", handleResize);
+      window.removeEventListener("resize", resizeCanvas);
     };
   }, []);
 

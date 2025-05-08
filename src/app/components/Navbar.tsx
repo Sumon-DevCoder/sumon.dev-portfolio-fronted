@@ -8,7 +8,7 @@ const Navbar = () => {
   const [activeSection, setActiveSection] = useState("");
   const [scrolled, setScrolled] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const dropdownRef = useRef(null);
+  const dropdownRef = useRef<HTMLDivElement | null>(null);
 
   // Toggle mobile menu
   const handleToggleMenu = () => {
@@ -39,8 +39,11 @@ const Navbar = () => {
     };
 
     // Handle clicks outside dropdown to close it
-    const handleClickOutside = (event: { target: never }) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target as Node)
+      ) {
         setIsDropdownOpen(false);
       }
     };
@@ -199,53 +202,55 @@ const Navbar = () => {
                 </li>
               ))}
               {/* CTA Button with Dropdown */}
-              <li className="relative" ref={dropdownRef}>
-                <button
-                  onClick={handleToggleDropdown}
-                  className="ml-2 px-4 py-2 bg-gradient-to-r from-green-700 to-green-800 text-white rounded-md text-sm lg:text-base font-medium hover:from-green-600 hover:to-green-800 transition-all duration-300 flex items-center shadow-md hover:shadow-lg"
-                >
-                  Hire Me
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className={`ml-1.5 h-4 w-4 transition-transform duration-300 animate-bounce`}
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
+              <li>
+                <div className="relative" ref={dropdownRef}>
+                  <button
+                    onClick={handleToggleDropdown}
+                    className="ml-2 px-4 py-2 bg-gradient-to-r from-green-700 to-green-800 text-white rounded-md text-sm lg:text-base font-medium hover:from-green-600 hover:to-green-800 transition-all duration-300 flex items-center shadow-md hover:shadow-lg"
                   >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M19 9l-7 7-7-7"
-                    />
-                  </svg>
-                </button>
+                    Hire Me
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className={`ml-1.5 h-4 w-4 transition-transform duration-300 animate-bounce`}
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M19 9l-7 7-7-7"
+                      />
+                    </svg>
+                  </button>
 
-                {/* Contact Dropdown */}
-                <div
-                  className={`absolute right-0 mt-2 w-60 rounded-md shadow-lg bg-slate-800 ring-1 ring-black ring-opacity-5 transition-all duration-300 origin-top-right ${
-                    isDropdownOpen
-                      ? "transform scale-100 opacity-100"
-                      : "transform scale-95 opacity-0 pointer-events-none"
-                  }`}
-                >
-                  <div className="py-2 px-3">
-                    <p className="text-green-400 font-medium mb-2 text-sm uppercase tracking-wide">
-                      Contact Me
-                    </p>
-                    <div className="space-y-2">
-                      {contactLinks.map((link, index) => (
-                        <a
-                          key={index}
-                          href={link.href}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className={`flex items-center px-3 py-2 rounded-md text-white text-sm font-medium transition-colors duration-300 ${link.color}`}
-                        >
-                          <span className="mr-2">{link.icon}</span>
-                          {link.label}
-                        </a>
-                      ))}
+                  {/* Contact Dropdown */}
+                  <div
+                    className={`absolute right-0 mt-2 w-60 rounded-md shadow-lg bg-slate-800 ring-1 ring-black ring-opacity-5 transition-all duration-300 origin-top-right ${
+                      isDropdownOpen
+                        ? "transform scale-100 opacity-100"
+                        : "transform scale-95 opacity-0 pointer-events-none"
+                    }`}
+                  >
+                    <div className="py-2 px-3">
+                      <p className="text-green-400 font-medium mb-2 text-sm uppercase tracking-wide">
+                        Contact Me
+                      </p>
+                      <div className="space-y-2">
+                        {contactLinks.map((link, index) => (
+                          <a
+                            key={index}
+                            href={link.href}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className={`flex items-center px-3 py-2 rounded-md text-white text-sm font-medium transition-colors duration-300 ${link.color}`}
+                          >
+                            <span className="mr-2">{link.icon}</span>
+                            {link.label}
+                          </a>
+                        ))}
+                      </div>
                     </div>
                   </div>
                 </div>
