@@ -12,7 +12,7 @@ import BlogSection from "../components/BlogSection";
 
 const HomePage = () => {
   return (
-    <div>
+    <div className="">
       <Navbar />
       <div className="">
         <HeroSection />

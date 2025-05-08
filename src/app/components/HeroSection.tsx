@@ -465,7 +465,7 @@ const HeroSection = () => {
 
           {/* Right image area */}
           <motion.div
-            className="w-full md:w-2/5 flex justify-center mt-5 md:mt-0"
+            className="w-full md:w-2/5 flex justify-center mt-16 md:mt-0"
             variants={imageVariants}
             initial="hidden"
             animate="visible"

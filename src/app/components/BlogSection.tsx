@@ -37,10 +37,10 @@ const BlogSection: React.FC = () => {
 
   return (
     <section
-      className="py-20 bg-gradient-to-b from-slate-900 to-slate-950"
+      className="py-20 bg-gradient-to-b from-slate-900 to-slate-950 "
       id="blogs"
     >
-      <div className="container mx-auto px-4">
+      <div className="mx-auto px-4">
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -59,7 +59,7 @@ const BlogSection: React.FC = () => {
                 placeholder="Search articles..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-full bg-slate-800/50 border border-slate-700 rounded-lg py-2 pl-10 pr-4 focus:outline-none focus:ring-2 focus:ring-green-500/50 text-slate-200"
+                className="w-full bg-slate-800/50  border-slate-700 rounded-lg py-2 pl-10 pr-4 focus:outline-none focus:ring-2 focus:ring-green-500/50 text-slate-200"
               />
               <Search
                 className="absolute left-3 top-2.5 text-slate-400"
@@ -75,7 +75,7 @@ const BlogSection: React.FC = () => {
               )}
             </div>
 
-            <div className="flex items-center gap-2 overflow-x-auto pb-2 md:pb-0 flex-nowrap">
+            <div className="flex items-center gap-2 overflow-x-auto pb-2 md:pb-0  flex-nowrap">
               {categories.map((category) => (
                 <button
                   key={category}
@@ -111,7 +111,7 @@ const BlogSection: React.FC = () => {
             variants={containerVariants}
             initial="hidden"
             animate="visible"
-            className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+            className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 "
           >
             {filteredBlogs.map((blog: TBlog) => (
               <BlogCard
