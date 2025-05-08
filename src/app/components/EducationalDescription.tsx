@@ -6,7 +6,6 @@ const SchoolIcon = () => <div className="text-2xl">🏫</div>;
 const UniversityIcon = () => <div className="text-2xl">🎓</div>;
 const GraduationIcon = () => <div className="text-2xl">🎓</div>;
 const AwardIcon = () => <div className="text-2xl">🏆</div>;
-const MedalIcon = () => <div className="text-2xl">🏅</div>;
 
 // Define types for the props of TimelineElement
 interface TimelineElementProps {
@@ -174,7 +173,7 @@ const EducationTimeline = () => {
           transition: "opacity 0.8s ease-out, transform 0.8s ease-out",
         }}
       >
-        <h2 className="text-4xl md:text-5xl font-bold mb-3 text-green-400">
+        <h2 className="text-4xl md:text-4xl font-bold mb-3 text-green-400">
           Educational Journey
         </h2>
 
@@ -242,12 +241,12 @@ const EducationTimeline = () => {
             transitionDelay: "0.6s",
           }}
         >
-          <div className="w-16 h-16 rounded-full bg-purple-600 flex items-center justify-center">
+          <div className="w-16 h-16 z-50 rounded-full bg-purple-600 flex items-center justify-center">
             <GraduationIcon />
           </div>
         </div>
         <div
-          className="text-center mb-16"
+          className="text-center mb-16 z-50"
           style={{
             opacity: visibleElements.includes(5) ? 1 : 0,
             transition: "opacity 0.6s ease-in-out",
@@ -258,52 +257,6 @@ const EducationTimeline = () => {
           <p className="text-sm text-gray-300">
             Looking forward to future learning opportunities
           </p>
-        </div>
-      </div>
-
-      {/* Skills & Certifications */}
-      <div
-        className="mt-16 mb-8 text-center"
-        style={{
-          opacity: visibleElements.includes(5) ? 1 : 0,
-          transition: "opacity 0.8s ease-in-out",
-          transitionDelay: "1s",
-        }}
-      >
-        <h3 className="text-3xl font-bold mb-8 text-green-400">
-          Skills & Certifications
-        </h3>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
-          <div className="bg-gray-800 p-6 rounded-lg shadow-lg transform transition hover:scale-105">
-            <div className="flex justify-center mb-4 text-green-400 text-2xl">
-              <MedalIcon />
-            </div>
-            <h4 className="text-xl font-semibold mb-2">Web Development</h4>
-            <p className="text-gray-300 text-sm">
-              HTML, CSS, JavaScript, React
-            </p>
-          </div>
-
-          <div className="bg-gray-800 p-6 rounded-lg shadow-lg transform transition hover:scale-105">
-            <div className="flex justify-center mb-4 text-yellow-400 text-2xl">
-              <MedalIcon />
-            </div>
-            <h4 className="text-xl font-semibold mb-2">Science & Research</h4>
-            <p className="text-gray-300 text-sm">
-              Laboratory techniques, data analysis, report writing
-            </p>
-          </div>
-
-          <div className="bg-gray-800 p-6 rounded-lg shadow-lg transform transition hover:scale-105">
-            <div className="flex justify-center mb-4 text-blue-400 text-2xl">
-              <MedalIcon />
-            </div>
-            <h4 className="text-xl font-semibold mb-2">Digital Design</h4>
-            <p className="text-gray-300 text-sm">
-              UI/UX fundamentals, graphic design basics
-            </p>
-          </div>
         </div>
       </div>
     </section>

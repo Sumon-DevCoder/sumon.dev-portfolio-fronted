@@ -1,23 +1,20 @@
 "use client";
 
-/* eslint-disable @typescript-eslint/no-unused-vars */
-import { authApi } from "@/redux/features/auth/authApi";
-import { setUser, TUser } from "@/redux/features/auth/authSlice";
-import { verifyToken } from "@/utils/verifyToken";
 import { useState } from "react";
 import { FieldValues, useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
-import { toast } from "sonner";
 import { HiEye, HiEyeOff } from "react-icons/hi";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
+import { toast } from "sonner";
+
+import { authApi } from "@/redux/features/auth/authApi";
+import { setUser, TUser } from "@/redux/features/auth/authSlice";
+import { verifyToken } from "@/utils/verifyToken";
 import { TError } from "@/types/gobal";
-import Link from "next/link";
 
 const Login = () => {
   const dispatch = useDispatch();
-  const pathname = usePathname();
   const router = useRouter();
-  const searchParams = useSearchParams();
   const [loginUser] = authApi.useLoginUserMutation();
   const {
     register,
@@ -38,10 +35,7 @@ const Login = () => {
       // Call the login mutation
       const res = await loginUser(userInfo).unwrap();
 
-      console.log("res", res);
-
       // redirect path
-      const from = searchParams.get("from") || "/";
 
       if (res) {
         const user = verifyToken(res?.token) as TUser; // set user in store
@@ -72,29 +66,79 @@ const Login = () => {
   };
 
   return (
-    <div className="mx-auto">
-      <div className="flex justify-center px-6 py-12">
-        <div className="w-full xl:w-3/4 lg:w-11/12 flex justify-center">
-          <div className="w-full lg:w-7/12 shadow-xl bg-gray-100 dark:bg-gray-700 p-5 rounded-lg lg:rounded-l-none">
-            <h3 className="py-4 text-2xl text-center text-gray-800 dark:text-white">
-              Login to Your Account
-            </h3>
-            <form
-              onSubmit={handleSubmit(onSubmit)}
-              className="px-8 pt-6 pb-8 mb-4 bg-gray-100 dark:bg-gray-800 rounded"
-            >
-              <div className="mb-4">
-                <label
-                  className="block mb-2 text-sm font-bold text-gray-700 dark:text-white"
-                  htmlFor="email"
-                >
-                  Email
-                </label>
+    <div className="min-h-screen flex py-10 items-center justify-center relative overflow-hidden bg-black">
+      {/* Animated Background Elements */}
+      <div className="absolute inset-0 z-0">
+        <div
+          className="floating-circle bg-purple-800 opacity-10"
+          style={{
+            top: "10%",
+            left: "15%",
+            width: "200px",
+            height: "200px",
+            animationDuration: "15s",
+          }}
+        ></div>
+        <div
+          className="floating-circle bg-blue-900 opacity-10"
+          style={{
+            top: "60%",
+            left: "75%",
+            width: "150px",
+            height: "150px",
+            animationDuration: "12s",
+            animationDelay: "1s",
+          }}
+        ></div>
+        <div
+          className="floating-circle bg-indigo-900 opacity-10"
+          style={{
+            top: "75%",
+            left: "30%",
+            width: "180px",
+            height: "180px",
+            animationDuration: "20s",
+            animationDelay: "2s",
+          }}
+        ></div>
+        <div
+          className="floating-circle bg-cyan-900 opacity-10"
+          style={{
+            top: "25%",
+            left: "65%",
+            width: "220px",
+            height: "220px",
+            animationDuration: "18s",
+            animationDelay: "3s",
+          }}
+        ></div>
+        <div className="grid-animation"></div>
+      </div>
+
+      {/* Login Panel */}
+      <div className="w-full max-w-md z-10 px-4">
+        <div className="bg-gray-900 border border-gray-800 rounded-2xl shadow-2xl overflow-hidden transition-all duration-300 hover:shadow-cyan-900/20">
+          {/* Header */}
+          <div className="bg-gradient-to-r from-gray-900 to-black p-6 text-center border-b border-gray-800">
+            <h2 className="text-2xl font-bold text-white mb-1">Welcome Back</h2>
+            <p className="text-gray-400">Login to your account</p>
+          </div>
+
+          {/* Form */}
+          <form onSubmit={handleSubmit(onSubmit)} className="p-6 space-y-6">
+            <div className="space-y-2">
+              <label
+                className="text-sm font-medium text-gray-300"
+                htmlFor="email"
+              >
+                Email Address
+              </label>
+              <div className="relative">
                 <input
-                  className="w-full px-3 py-2 text-sm leading-tight text-gray-700 dark:text-white border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
+                  className="w-full px-4 py-3 rounded-lg bg-gray-800 border border-gray-700 text-gray-100 focus:ring-1 focus:ring-cyan-500 focus:border-cyan-500 transition-colors"
                   id="email"
                   type="email"
-                  placeholder="Enter Email"
+                  placeholder="your@email.com"
                   {...register("email", {
                     required: "Email is required",
                     pattern: {
@@ -103,77 +147,91 @@ const Login = () => {
                     },
                   })}
                 />
-                {errors.email && (
-                  <p className="text-red-500 text-sm ml-2 mt-1">
-                    {errors.email.message as string}
-                  </p>
-                )}
               </div>
+              {errors.email && (
+                <p className="text-red-400 text-xs mt-1">
+                  {errors.email.message as string}
+                </p>
+              )}
+            </div>
 
-              <div className="mb-4">
-                <label
-                  className="block mb-2 text-sm font-bold text-gray-700 dark:text-white"
-                  htmlFor="password"
-                >
-                  Password
-                </label>
-                <div className="relative">
-                  <input
-                    className="w-full px-3 py-2 mb-3 text-sm leading-tight text-gray-700 dark:text-white border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
-                    id="password"
-                    type={showPassword ? "text" : "password"}
-                    placeholder="Enter Password"
-                    {...register("password", {
-                      required: "Password is required",
-                      minLength: {
-                        value: 6,
-                        message: "Password must be at least 6 characters long",
-                      },
-                    })}
-                  />
-                  <button
-                    type="button"
-                    onClick={() => setShowPassword(!showPassword)}
-                    className="absolute top-2 right-0 flex items-center px-3 text-gray-500 focus:outline-none"
-                  >
-                    {showPassword ? (
-                      <HiEyeOff className="text-xl" />
-                    ) : (
-                      <HiEye className="text-xl" />
-                    )}
-                  </button>
-                </div>
-                {errors.password && (
-                  <p className="text-red-500 text-sm ml-2 mt-1">
-                    {errors.password.message as string}
-                  </p>
-                )}
-              </div>
-
-              <div className="mb-6 text-center">
+            <div className="space-y-2">
+              <label
+                className="text-sm font-medium text-gray-300"
+                htmlFor="password"
+              >
+                Password
+              </label>
+              <div className="relative">
+                <input
+                  className="w-full px-4 py-3 rounded-lg bg-gray-800 border border-gray-700 text-gray-100 focus:ring-1 focus:ring-cyan-500 focus:border-cyan-500 transition-colors"
+                  id="password"
+                  type={showPassword ? "text" : "password"}
+                  placeholder="••••••••"
+                  {...register("password", {
+                    required: "Password is required",
+                    minLength: {
+                      value: 6,
+                      message: "Password must be at least 6 characters",
+                    },
+                  })}
+                />
                 <button
-                  className="w-full px-4 py-2 font-semibold text-white bg-blue-500 hover:bg-blue-700 rounded-full focus:outline-none focus:shadow-outline"
-                  type="submit"
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-200"
                 >
-                  Login
+                  {showPassword ? (
+                    <HiEyeOff className="text-xl" />
+                  ) : (
+                    <HiEye className="text-xl" />
+                  )}
                 </button>
               </div>
-
-              <div className="text-center">
-                <p className="inline-block text-md text-black dark:text-blue-500 align-baseline">
-                  Don&apos;t have an account?{" "}
-                  <Link
-                    className="font-semibold text-indigo-500 underline"
-                    href={"/register"}
-                  >
-                    Register
-                  </Link>
+              {errors.password && (
+                <p className="text-red-400 text-xs mt-1">
+                  {errors.password.message as string}
                 </p>
-              </div>
-            </form>
-          </div>
+              )}
+            </div>
+
+            <button
+              className="w-full bg-gradient-to-r from-cyan-500 to-blue-600 text-white py-3 rounded-lg font-medium transition-all hover:from-cyan-600 hover:to-blue-700 focus:outline-none focus:ring-1 focus:ring-cyan-500 focus:ring-offset-1 focus:ring-offset-gray-900 shadow-lg shadow-cyan-900/30 hover:shadow-cyan-800/40"
+              type="submit"
+            >
+              Sign In
+            </button>
+          </form>
         </div>
       </div>
+
+      {/* CSS for animations */}
+      <style jsx>{`
+        @keyframes float {
+          0% {
+            transform: translatey(0px) translatex(0px);
+          }
+          25% {
+            transform: translatey(-20px) translatex(10px);
+          }
+          50% {
+            transform: translatey(0px) translatex(20px);
+          }
+          75% {
+            transform: translatey(20px) translatex(10px);
+          }
+          100% {
+            transform: translatey(0px) translatex(0px);
+          }
+        }
+
+        .floating-circle {
+          position: absolute;
+          border-radius: 50%;
+          animation: float 15s ease-in-out infinite;
+          filter: blur(40px);
+        }
+      `}</style>
     </div>
   );
 };

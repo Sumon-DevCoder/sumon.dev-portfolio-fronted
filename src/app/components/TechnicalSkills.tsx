@@ -1,11 +1,10 @@
+/* eslint-disable @next/next/no-img-element */
 /* eslint-disable react/no-unescaped-entities */
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { useGetSkillsQuery } from "@/redux/features/skills/skillsApi";
-import AOS from "aos";
-import "aos/dist/aos.css";
 import DynamicLoading from "./DynamicLoading";
 
 // type
@@ -20,14 +19,6 @@ const TechnicalSkills = () => {
   const { data, isLoading } = useGetSkillsQuery({});
   const skillsData = data?.data?.result;
   const [activeTab, setActiveTab] = useState("all");
-
-  useEffect(() => {
-    AOS.init({
-      duration: 1000,
-      once: true,
-      offset: 100,
-    });
-  }, []);
 
   // Create skill categories
   const categories = ["all", "frontend", "backend", "database", "tools"];

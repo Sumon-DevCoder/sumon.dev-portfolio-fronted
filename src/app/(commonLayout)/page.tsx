@@ -8,7 +8,7 @@ import ProjectSection from "../components/ProjectSection";
 // import Testimonials from "../components/Testimonials";
 import ContactSection from "../components/ContactSection";
 import BlogSection from "../components/BlogSection";
-import EducationalDescription from "../components/EducationalDescription";
+// import EducationalDescription from "../components/EducationalDescription";
 
 const HomePage = () => {
   return (
@@ -18,7 +18,7 @@ const HomePage = () => {
         <HeroSection />
         <TechnicalSkills />
         <ProjectSection />
-        <EducationalDescription />
+        {/* <EducationalDescription /> */}
         <BlogSection />
         {/* <Testimonials /> */}
         <ContactSection />

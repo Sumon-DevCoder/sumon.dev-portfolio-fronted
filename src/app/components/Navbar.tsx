@@ -3,6 +3,11 @@
 import { SetStateAction, useEffect, useState, useRef } from "react";
 import Link from "next/link";
 
+interface Section {
+  id: string;
+  element: HTMLElement | null;
+}
+
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("");
@@ -27,6 +32,22 @@ const Navbar = () => {
   };
 
   useEffect(() => {
+    // Define sections for scroll tracking
+    const sections: Section[] = [
+      { id: "home", element: null },
+      { id: "skills", element: null },
+      { id: "project", element: null },
+      { id: "blogs", element: null },
+      { id: "contact", element: null },
+    ];
+
+    // Get all section elements after DOM is ready
+    const getSectionElements = () => {
+      sections.forEach((section) => {
+        section.element = document.getElementById(section.id);
+      });
+    };
+
     // Set active section based on hash
     const handleHashChange = () => {
       const hash = window.location.hash || "#home";
@@ -36,6 +57,27 @@ const Navbar = () => {
     // Check if page is scrolled for navbar styling
     const handleScroll = () => {
       setScrolled(window.scrollY > 20);
+
+      // Determine which section is currently visible
+      const scrollPosition = window.scrollY + window.innerHeight / 3;
+
+      // Find the current section
+      let currentSectionId = null;
+      for (let i = sections.length - 1; i >= 0; i--) {
+        const section = sections[i];
+        if (section.element) {
+          const offsetTop = section.element.offsetTop;
+          if (scrollPosition >= offsetTop) {
+            currentSectionId = section.id;
+            break;
+          }
+        }
+      }
+
+      // Only update if we found a section and it's different from current
+      if (currentSectionId && `#${currentSectionId}` !== activeSection) {
+        setActiveSection(`#${currentSectionId}`);
+      }
     };
 
     // Handle clicks outside dropdown to close it
@@ -48,9 +90,9 @@ const Navbar = () => {
       }
     };
 
-    // Initial values
+    // Only run once on mount
+    getSectionElements();
     handleHashChange();
-    handleScroll();
 
     // Event listeners
     window.addEventListener("hashchange", handleHashChange);
@@ -62,7 +104,7 @@ const Navbar = () => {
       window.removeEventListener("scroll", handleScroll);
       document.removeEventListener("mousedown", handleClickOutside);
     };
-  }, []);
+  }, []); // Empty dependency array = run only on mount
 
   const navLinks = [
     { href: "#home", label: "Home" },

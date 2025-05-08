@@ -394,7 +394,7 @@ const HeroSection = () => {
               className="flex flex-wrap gap-4 mb-10"
             >
               <Link
-                href="https://docs.google.com/document/d/13F7QbWT-BGJlKwMMnIY_Byj97lL9Mq-jfOqvnLmTIkI/edit?usp=sharing"
+                href="https://drive.google.com/file/d/12kPSgIZTDIhltFvGZuQ5P1BqCbGefrBg/view?usp=sharing"
                 target="_blank"
               >
                 <button className="group relative px-6 py-3 bg-gradient-to-r from-green-500 to-emerald-600 hover:from-emerald-600 hover:to-green-700 text-white font-medium rounded-lg flex items-center gap-2 shadow-lg shadow-green-500/20 hover:shadow-green-500/40 transition-all duration-300 overflow-hidden">
