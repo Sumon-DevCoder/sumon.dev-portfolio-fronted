@@ -171,7 +171,7 @@ const ContactSection = () => {
                 </a>
 
                 <a
-                  href="https://instagram.com/mustafizurrahman_sumon"
+                  href="https://instagram.com/sumon.devcoder"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center justify-center w-10 h-10 md:w-12 md:h-12 rounded-full bg-gradient-to-br from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-gray-300 hover:text-white border border-pink-600 hover:border-pink-500/50 transition-all duration-300 shadow-lg hover:shadow-pink-500/30 transform hover:-translate-y-1"

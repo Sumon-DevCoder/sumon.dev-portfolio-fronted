@@ -182,7 +182,7 @@ const Navbar = () => {
       color: "bg-blue-600 hover:bg-blue-700",
     },
     {
-      href: "https://www.instagram.com/mustafizurrahman_sumon",
+      href: "https://www.instagram.com/sumon.devcoder",
       label: "Instagram",
       icon: (
         <svg
