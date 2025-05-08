@@ -206,7 +206,7 @@ const Navbar = () => {
           : "bg-slate-900/95 py-4"
       }`}
     >
-      <div className="mx-auto md:px-8">
+      <div className="mx-auto px-5 md:px-8">
         <div className="flex items-center justify-between">
           {/* Logo */}
           <Link
