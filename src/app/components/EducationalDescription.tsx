@@ -11,7 +11,7 @@ const MedalIcon = () => <div className="text-2xl">🏅</div>;
 // Define types for the props of TimelineElement
 interface TimelineElementProps {
   date: string;
-  position: "left" | "right";
+  position: any;
   children: React.ReactNode;
   gradientFrom: string;
   gradientTo: string;
@@ -89,7 +89,7 @@ const TimelineElement: React.FC<TimelineElementProps> = ({
 
 const EducationTimeline = () => {
   const [selectedElement, setSelectedElement] = useState(null);
-  const [visibleElements, setVisibleElements] = useState([]);
+  const [visibleElements, setVisibleElements] = useState<number[]>([]);
 
   React.useEffect(() => {
     // Simulate the animation by gradually revealing elements
